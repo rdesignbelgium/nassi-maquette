@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logo-amber.png">
+<title>Nassi Officiel</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap">
+<style>
+/* Layout: studio noir — a single dark world lit by the amber of the photos; blue spotlight reserved for the concert. */
+:root{
+  --bg:#0e0906;          /* fond principal, brun-noir chaud */
+  --bg-2:#17100b;        /* bandes */
+  --bg-3:#221711;        /* cartes */
+  --fg:#f6ecdd;          /* texte crème */
+  --fg-2:#b9a894;        /* texte secondaire */
+  --line:rgba(246,236,221,.12);
+  --amber:#f2a21b;       /* accent principal, safran */
+  --amber-2:#c9731a;     /* accent profond */
+  --ember:#e4452b;       /* rouge Arabesque vol.II */
+  --indigo:#1b2bd4;      /* spot bleu — scène */
+  --indigo-2:#0a1052;
+  --font-display:"Unbounded",system-ui,sans-serif;
+  --font-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --gutter-l:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+  --radius:18px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--font-display);line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.wrap{max-width:1240px;margin-inline:auto;padding-left:var(--gutter-l);padding-right:var(--gutter-r)}
+.eyebrow{font-family:var(--font-body);font-weight:600;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.eyebrow::before{content:"";display:inline-block;width:22px;height:2px;background:var(--amber);vertical-align:middle;margin-right:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:999px;font-weight:600;font-size:.95rem;border:1px solid transparent;transition:transform .25s ease,background .25s ease,color .25s,border-color .25s;position:relative;overflow:hidden;white-space:nowrap}
+.btn:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.btn-primary{background:var(--amber);color:#1a0f05}
+.btn-primary:hover{background:#ffb531;transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line);color:var(--fg);background:rgba(255,255,255,.03);backdrop-filter:blur(8px)}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;backdrop-filter:blur(14px);background:linear-gradient(to bottom,rgba(14,9,6,.9),rgba(14,9,6,.55));border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{height:16px;width:auto;display:block}
+.logo i{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 16px var(--amber);display:inline-block;flex:none}
+footer .logo img{height:20px}
+.nav-links{display:flex;gap:28px;font-size:.9rem;font-weight:500;color:var(--fg-2)}
+.nav-links a{position:relative;transition:color .2s;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1.5px;background:var(--amber);transition:right .3s ease}
+.nav-links a:hover{color:var(--fg)}.nav-links a:hover::after{right:0}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.cart-btn{position:relative;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;display:grid;place-items:center}
+.cart-btn svg{width:20px;height:20px}
+.cart-count{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:10px;background:var(--amber);color:#1a0f05;font-size:.7rem;font-weight:700;display:grid;place-items:center;padding:0 5px;transform:scale(0);transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.cart-count.on{transform:scale(1)}
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:transparent;place-items:center}
+.burger span{display:block;width:18px;height:2px;background:var(--fg);margin:2.5px 0;transition:.3s}
+@media (max-width:860px){.nav-links{display:none}.burger{display:grid}.nav .btn-nav{display:none}
+  .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--bg-2);padding:20px var(--gutter-l) 28px var(--gutter-r);gap:14px;border-bottom:1px solid var(--line);font-size:1.1rem}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:min(92vh,900px);display:grid;align-items:end;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:62% 20%;transform:scale(1.08);animation:heroZoom 12s ease-out forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero-veil{position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(90deg,rgba(14,9,6,.92) 0%,rgba(14,9,6,.6) 38%,rgba(14,9,6,.05) 70%),
+  linear-gradient(0deg,var(--bg) 0%,rgba(14,9,6,.35) 35%,transparent 65%)}
+.hero-grain{position:absolute;inset:0;z-index:-1;opacity:.35;mix-blend-mode:overlay;pointer-events:none}
+.hero .wrap{padding-block:120px 70px;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:12px;padding:8px 14px 8px 8px;border:1px solid var(--line);border-radius:999px;font-size:.78rem;font-weight:500;color:var(--fg-2);background:rgba(14,9,6,.4);backdrop-filter:blur(8px);margin-bottom:26px;animation:rise .9s .1s both}
+.hero-eyebrow b{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--amber);color:#1a0f05;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}
+.hero-eyebrow b::before{content:"";width:6px;height:6px;border-radius:50%;background:#1a0f05;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.2}}
+.hero h1{font-size:clamp(2.9rem,8.4vw,7.2rem);font-weight:900;line-height:.92;max-width:11ch;animation:rise 1s .25s both}
+.hero h1 em{font-style:normal;color:var(--amber);display:block}
+.hero h1 .outline{-webkit-text-stroke:2px var(--fg);color:transparent}
+.hero p{max-width:46ch;color:var(--fg-2);font-size:1.08rem;margin:26px 0 34px;animation:rise 1s .4s both}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;animation:rise 1s .55s both}
+.hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);font-size:.85rem;color:var(--fg-2);animation:rise 1s .7s both}
+.hero-meta strong{display:block;color:var(--fg);font-family:var(--font-display);font-weight:600;font-size:1rem;margin-bottom:2px}
+.scroll-cue{position:absolute;right:var(--gutter-r);bottom:40px;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-2)}
+.scroll-cue i{width:1px;height:54px;background:linear-gradient(var(--amber),transparent);display:block;animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media (max-width:700px){.hero .wrap{padding-block:90px 60px}.hero-bg img{object-position:68% 15%}.scroll-cue{display:none}.hero-meta{gap:18px}}
+
+/* ---------- MARQUEE ---------- */
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--bg-2);padding:18px 0;position:relative}
+.marquee-track{display:flex;gap:0;width:max-content;animation:scroll 32s linear infinite}
+.marquee span{font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;padding:0 28px;color:var(--fg-2);white-space:nowrap}
+.marquee span::after{content:"✦";color:var(--amber);margin-left:56px;font-size:.8rem}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ---------- SECTIONS ---------- */
+section{padding-block:110px}
+.sec-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;margin-bottom:56px}
+.sec-head h2{font-size:clamp(2rem,4.6vw,3.6rem);font-weight:800;margin-top:14px;max-width:14ch}
+.sec-head p{color:var(--fg-2);max-width:48ch;margin:0}
+@media (max-width:760px){section{padding-block:80px}.sec-head{grid-template-columns:1fr;margin-bottom:36px}}
+
+/* univers */
+.univers{background:var(--bg)}
+.univers-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:120px;gap:14px}
+.tile{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--bg-3)}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.tile:hover img{transform:scale(1.06)}
+.tile .cap{position:absolute;left:18px;bottom:16px;right:18px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);opacity:0;transform:translateY(8px);transition:.4s}
+.tile:hover .cap{opacity:1;transform:none}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(14,9,6,.7),transparent 50%);opacity:0;transition:.4s}
+.tile:hover::after{opacity:1}
+.t1{grid-column:span 5;grid-row:span 5}.t2{grid-column:span 4;grid-row:span 3}.t3{grid-column:span 3;grid-row:span 3}
+.t4{grid-column:span 3;grid-row:span 2}.t5{grid-column:span 4;grid-row:span 2}
+.tile-text{grid-column:span 3;grid-row:span 2;border-radius:var(--radius);background:var(--amber);color:#1a0f05;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+.tile-text strong{font-family:var(--font-display);font-size:2.2rem;font-weight:800;line-height:1}
+.tile-text span{font-size:.8rem;font-weight:600;letter-spacing:.06em}
+@media (max-width:900px){.univers-grid{grid-auto-rows:90px}.t1{grid-column:span 12;grid-row:span 5}.t2{grid-column:span 6;grid-row:span 4}.t3{grid-column:span 6;grid-row:span 4}.t4{grid-column:span 6;grid-row:span 3}.t5{grid-column:span 6;grid-row:span 3}.tile-text{grid-column:span 12;grid-row:span 2;flex-direction:row;align-items:center}}
+
+.univers-copy{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;margin-top:80px;align-items:center}
+.univers-copy h3{font-size:clamp(1.5rem,2.8vw,2.3rem);font-weight:600;line-height:1.2}
+.univers-copy p{color:var(--fg-2);max-width:58ch}
+.quote{border-left:3px solid var(--amber);padding-left:22px;font-family:var(--font-display);font-weight:400;font-size:1.15rem;line-height:1.5;color:var(--fg)}
+.quote small{display:block;font-family:var(--font-body);font-size:.8rem;color:var(--fg-2);margin-top:12px;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:860px){.univers-copy{grid-template-columns:1fr;gap:32px;margin-top:50px}}
+
+/* musique */
+.musique{background:var(--bg-2);position:relative;overflow:hidden}
+.musique::before{content:"";position:absolute;width:70vw;height:70vw;max-width:900px;max-height:900px;border-radius:50%;background:radial-gradient(circle,rgba(242,162,27,.14),transparent 60%);top:-20%;right:-20%;pointer-events:none}
+.release{display:grid;grid-template-columns:420px 1fr;gap:56px;align-items:center}
+.cover{position:relative;aspect-ratio:1;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 1px var(--line);transform:rotate(-2deg);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.cover:hover{transform:rotate(0) scale(1.02)}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.cover .vol{position:absolute;left:22px;top:22px;font-family:var(--font-display);font-weight:900;font-size:.8rem;letter-spacing:.3em;color:var(--fg)}
+.cover .play{position:absolute;right:22px;bottom:22px;width:64px;height:64px;border-radius:50%;background:var(--amber);display:grid;place-items:center;border:none;box-shadow:0 10px 30px rgba(242,162,27,.5);transition:transform .3s}
+.cover .play:hover{transform:scale(1.08)}
+.cover .play svg{width:22px;height:22px;fill:#1a0f05;margin-left:3px}
+.release h3{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;margin-top:14px}
+.release p{color:var(--fg-2);max-width:50ch}
+.platforms{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.platforms a{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:999px;border:1px solid var(--line);font-size:.86rem;font-weight:500;transition:.25s}
+.platforms a:hover{border-color:var(--amber);background:rgba(242,162,27,.08);transform:translateY(-2px)}
+.platforms svg{width:16px;height:16px;fill:currentColor}
+.tracklist{margin-top:36px;border-top:1px solid var(--line)}
+.track{display:grid;grid-template-columns:36px 1fr auto auto;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s;border-radius:8px}
+.track:hover{background:rgba(255,255,255,.03)}
+.track .n{font-family:var(--font-display);font-size:.75rem;color:var(--fg-2);font-variant-numeric:tabular-nums}
+.track .t{font-weight:500}
+.track .d{font-size:.8rem;color:var(--fg-2);font-variant-numeric:tabular-nums}
+.bars{display:flex;gap:3px;align-items:flex-end;height:18px;width:26px;opacity:0;transition:opacity .3s}
+.bars i{flex:1;background:var(--amber);height:30%;border-radius:2px}
+.track.playing .bars{opacity:1}
+.track.playing .bars i{animation:eq .8s ease-in-out infinite alternate}
+.track.playing .bars i:nth-child(2){animation-delay:.2s}.track.playing .bars i:nth-child(3){animation-delay:.4s}
+.track.playing .t{color:var(--amber)}
+@keyframes eq{from{height:20%}to{height:100%}}
+@media (max-width:900px){.release{grid-template-columns:1fr;gap:40px}.cover{max-width:420px}}
+
+/* concert */
+.concert{background:radial-gradient(ellipse at 70% 20%,rgba(27,43,212,.35),transparent 55%),var(--bg);position:relative;overflow:hidden}
+.concert .spot{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 78% 50%,rgba(255,255,255,.10),rgba(27,43,212,.18) 22%,transparent 45%);opacity:.9}
+.concert-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.concert-photo{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;max-width:520px;justify-self:end}
+.concert-photo img{width:100%;height:100%;object-fit:cover}
+.concert-photo .tag{position:absolute;left:18px;top:18px;background:var(--fg);color:#0e0906;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:30px 0}
+.countdown div{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:16px 8px;text-align:center}
+.countdown b{display:block;font-family:var(--font-display);font-weight:800;font-size:clamp(1.6rem,3.6vw,2.6rem);font-variant-numeric:tabular-nums;line-height:1}
+.countdown small{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-2)}
+.events{display:grid;gap:12px;margin-top:10px}
+.event{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:center;padding:18px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.3s;text-decoration:none}
+.event:hover{border-color:rgba(242,162,27,.6);background:rgba(242,162,27,.06);transform:translateX(4px)}
+.event .date{text-align:center;border-right:1px solid var(--line);padding-right:14px}
+.event .date b{display:block;font-family:var(--font-display);font-size:1.6rem;font-weight:800;line-height:1}
+.event .date span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+.event .venue{font-weight:600}
+.event .city{font-size:.85rem;color:var(--fg-2)}
+.event .price{font-size:.85rem;color:var(--fg-2);text-align:right}
+.event .price b{display:block;color:var(--fg);font-size:1rem}
+.event .status{display:inline-block;margin-top:4px;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:rgba(242,162,27,.15);color:var(--amber)}
+.event .status.soldout{background:rgba(228,69,43,.15);color:var(--ember)}
+.dice-note{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:.8rem;color:var(--fg-2)}
+.dice-note .dice{font-family:var(--font-display);font-weight:900;font-size:.8rem;letter-spacing:.1em;border:1.5px solid var(--fg);padding:4px 8px;border-radius:6px;color:var(--fg)}
+.events-empty{padding:24px;border:1px dashed var(--line);border-radius:16px;color:var(--fg-2);font-size:.9rem}
+@media (max-width:900px){.concert-grid{grid-template-columns:1fr}.concert-photo{justify-self:start;max-width:100%;aspect-ratio:4/3}.concert-photo img{object-position:50% 30%}}
+@media (max-width:520px){.event{grid-template-columns:60px 1fr;gap:14px}.event .price{grid-column:2;text-align:left;display:flex;gap:10px;align-items:center}.event .price b{display:inline}}
+
+/* shop */
+.shop{background:var(--bg-2)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px}
+.chip{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:.85rem;font-weight:500;color:var(--fg-2);transition:.25s}
+.chip:hover{color:var(--fg);border-color:var(--fg-2)}
+.chip.on{background:var(--fg);color:#0e0906;border-color:var(--fg)}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.product{background:var(--bg-3);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .4s;animation:pop .5s both}
+.product:hover{transform:translateY(-6px);border-color:rgba(242,162,27,.5);box-shadow:0 30px 60px -30px rgba(0,0,0,.9)}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.product .ph{position:relative;background:#fff;aspect-ratio:1;overflow:hidden}
+.product .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.product:hover .ph img{transform:scale(1.05)}
+.product .badge{position:absolute;top:12px;left:12px;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:#0e0906;color:var(--fg)}
+.product .badge.hot{background:var(--ember);color:#fff}
+.product .info{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.product .col{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+.product h3{font-family:var(--font-body);font-weight:600;font-size:1.02rem;line-height:1.3}
+.product .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:10px}
+.product .price{font-family:var(--font-display);font-weight:600;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.product .price small{font-family:var(--font-body);font-weight:400;font-size:.72rem;color:var(--fg-2);margin-right:4px}
+.sizes{display:flex;gap:5px}
+.size{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:transparent;font-size:.72rem;font-weight:600;color:var(--fg-2);transition:.2s}
+.size.on,.size:hover{border-color:var(--amber);color:var(--amber)}
+.add{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:transparent;font-weight:600;font-size:.9rem;transition:.25s;display:flex;justify-content:center;gap:8px;align-items:center}
+.add:hover{background:var(--amber);color:#1a0f05;border-color:var(--amber)}
+.add.done{background:#2f9e5f;color:#fff;border-color:#2f9e5f}
+.shop-foot{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center;margin-top:44px;padding:24px 28px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.02)}
+.shop-foot .items{display:flex;flex-wrap:wrap;gap:22px;font-size:.85rem;color:var(--fg-2)}
+.shop-foot .items b{color:var(--fg);display:block;font-weight:600}
+
+/* cart drawer */
+.drawer{position:fixed;inset:0;z-index:80;pointer-events:none}
+.drawer .veil{position:absolute;inset:0;background:rgba(0,0,0,.6);opacity:0;transition:.35s}
+.drawer .panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg-2);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 24px}
+.drawer.open{pointer-events:auto}.drawer.open .veil{opacity:1}.drawer.open .panel{transform:none}
+.drawer h3{font-size:1.2rem;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.drawer .close{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:1.2rem}
+.cart-items{flex:1;overflow:auto;margin:20px 0;display:flex;flex-direction:column;gap:12px;min-width:0}
+.ci{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:10px;border-radius:12px;background:var(--bg-3)}
+.ci img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:#fff}
+.ci .nm{font-weight:600;font-size:.9rem;line-height:1.25}
+.ci .sz{font-size:.75rem;color:var(--fg-2)}
+.ci .q{display:flex;align-items:center;gap:8px}
+.ci .q button{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent}
+.ci .pr{font-weight:600;font-variant-numeric:tabular-nums;text-align:right;font-size:.9rem}
+.cart-empty{text-align:center;color:var(--fg-2);padding:40px 10px}
+.cart-total{border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--font-display);font-weight:600}
+.cart-total+.btn{margin-top:14px;justify-content:center}
+.ship{font-size:.78rem;color:var(--fg-2);text-align:center;margin-top:10px}
+
+/* cercle (newsletter) */
+.cercle{position:relative;overflow:hidden;background:var(--amber);color:#1a0f05;padding-block:90px}
+.cercle .pattern{position:absolute;inset:0;opacity:.12;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%231a0f05' stroke-width='1.2'%3E%3Cpath d='M40 4l10 26 26 10-26 10-10 26-10-26L4 40l26-10z'/%3E%3Ccircle cx='40' cy='40' r='9'/%3E%3C/g%3E%3C/svg%3E")}
+.cercle .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.cercle .eyebrow{color:#1a0f05}.cercle .eyebrow::before{background:#1a0f05}
+.cercle h2{font-size:clamp(2rem,4.6vw,3.6rem);font-weight:800;margin-top:14px}
+.cercle p{max-width:46ch;opacity:.85}
+.form{display:grid;gap:10px;background:#1a0f05;padding:26px;border-radius:var(--radius);color:var(--fg);box-shadow:0 40px 70px -30px rgba(0,0,0,.7)}
+.form label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-2)}
+.form input{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg-3);color:var(--fg);font:inherit}
+.form input::placeholder{color:#7d6f5f}
+.form .btn{justify-content:center;margin-top:6px}
+.form .ok{display:none;text-align:center;padding:20px 0;color:var(--amber);font-weight:600}
+.form.sent .ok{display:block}.form.sent .f{display:none}
+.form .legal{font-size:.72rem;color:var(--fg-2);line-height:1.5}
+.perks{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.perks span{font-size:.8rem;font-weight:600;padding:8px 14px;border:1.5px solid #1a0f05;border-radius:999px}
+@media (max-width:860px){.cercle .wrap{grid-template-columns:1fr}}
+
+/* footer */
+footer{background:#080503;padding:70px 0 calc(100px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+footer h4{font-family:var(--font-display);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-2);margin:0 0 16px;font-weight:600}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;font-size:.92rem}
+footer a:hover{color:var(--amber)}
+.big-logo{font-family:var(--font-display);font-weight:900;font-size:clamp(3rem,9vw,7rem);letter-spacing:.06em;line-height:1;color:var(--bg-3);margin-top:60px;user-select:none}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);font-size:.78rem;color:var(--fg-2)}
+.socials{display:flex;gap:10px}
+.socials a{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:.25s}
+.socials a:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-3px)}
+.socials svg{width:17px;height:17px;fill:currentColor}
+@media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.foot-grid{grid-template-columns:1fr}}
+
+/* sticky mobile CTA */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px var(--gutter-r) calc(10px + env(safe-area-inset-bottom,0px)) var(--gutter-l);background:linear-gradient(transparent,rgba(14,9,6,.95) 30%);display:none;gap:10px;transform:translateY(120%);transition:transform .4s}
+.sticky-cta.show{transform:none}
+.sticky-cta .btn{flex:1;justify-content:center;padding:14px}
+@media (max-width:860px){.sticky-cta{display:flex}}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--fg);color:#0e0906;padding:12px 18px;border-radius:999px;font-weight:600;font-size:.9rem;opacity:0;transition:.35s;z-index:90;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.hero-bg img{transform:none}}
+</style>
+</head>
+<body>
+
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Nassi — accueil"><i></i><img src="img/logo-white.png" alt="Nassi"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#univers">Univers</a>
+      <a href="#musique">Musique</a>
+      <a href="#concert">Concert</a>
+      <a href="#shop">Shop</a>
+      <a href="#cercle">Le Cercle</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-primary btn-nav" href="#concert">Billets</a>
+      <button class="cart-btn" id="cartBtn" aria-label="Panier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L5 3H2"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-bg"><img src="img/r3a7417.jpg" alt="Nassi au micro, lumière ambrée"></div>
+  <div class="hero-veil"></div>
+  <canvas class="hero-grain" id="grain"></canvas>
+  <div class="wrap">
+    <div class="hero-eyebrow"><b>Live</b> 19 décembre · La Maroquinerie, Paris · Billets en vente</div>
+    <h1>Entre<br><span class="outline">deux</span><em>rives.</em></h1>
+    <p>Des mélodies qui traversent la Méditerranée, des textes qui parlent au cœur. Bienvenue dans l'univers de Nassi : la musique, la scène, et les pièces à porter.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://dice.fm/event/l8dqkr-nassi-19th-dec-la-maroquinerie-paris-tickets?lng=fr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg>Réserver mon billet</a>
+      <a class="btn btn-ghost" href="#musique"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Écouter Arabesque</a>
+    </div>
+    <div class="hero-meta">
+      <div><strong>Arabesque Vol. III</strong>Dernière sortie</div>
+      <div><strong>Ya Lalla</strong>Clip officiel</div>
+      <div><strong>13 pièces</strong>Boutique officielle</div>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll<i></i></div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee">
+    <span>Arabesque</span><span>Ya Lalla</span><span>Layali</span><span>Boussa</span><span>Rifia</span><span>Dark Nador</span><span>Arabesque Vol. II</span><span>Arabesque Vol. III</span>
+  </div>
+</div>
+
+<!-- ============ UNIVERS ============ -->
+<section class="univers" id="univers">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">L'univers</div><h2>La lumière, le micro, et une voix.</h2></div>
+      <p>Studio, scène, coulisses : plongez dans les images qui racontent Nassi, entre or ambré et bleu nuit.</p>
+    </div>
+    <div class="univers-grid">
+      <figure class="tile t1 reveal"><img src="img/r3a7615.jpg" alt="Nassi en chemise blanche face au micro"><figcaption class="cap">Session studio · 2026</figcaption></figure>
+      <figure class="tile t2 reveal"><img src="img/1x6a8596.jpg" alt="Nassi assis sur un canapé ambré"><figcaption class="cap">Backstage</figcaption></figure>
+      <figure class="tile t3 reveal"><img src="img/r3a7234.jpg" alt="Silhouette de Nassi dans un spot bleu"><figcaption class="cap">Lumière de scène</figcaption></figure>
+      <div class="tile-text reveal"><strong>III</strong><span>volumes Arabesque, une seule signature.</span></div>
+      <figure class="tile t4 reveal"><img src="img/r3a7562.jpg" alt="Nassi chantant, lunettes noires"><figcaption class="cap">Portrait</figcaption></figure>
+      <figure class="tile t5 reveal"><img src="img/r3a7398.jpg" alt="Nassi en hoodie ambré au micro vintage"><figcaption class="cap">Ambre</figcaption></figure>
+    </div>
+    <div class="univers-copy">
+      <div class="reveal">
+        <h3>Une musique qui parle à ceux qui vivent entre deux cultures.</h3>
+        <p>Nassi chante ce qu'on ressent sans toujours savoir le dire : l'attachement, la nostalgie, les retrouvailles, la fête. Chaque titre est une passerelle entre les sonorités d'ici et de là-bas, portée par une voix chaude et sincère.</p>
+        <p>Ce site rassemble tout son univers au même endroit : les dernières sorties, les dates de concert avec billetterie officielle, et la boutique officielle pour porter les couleurs d'Arabesque.</p>
+      </div>
+      <div class="quote reveal">« La scène, c'est l'endroit où la distance disparaît. Chaque concert, c'est une maison qu'on ouvre. »<small>Nassi</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MUSIQUE ============ -->
+<section class="musique" id="musique">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Musique</div><h2>Dernière sortie</h2></div>
+      <p>Disponible sur toutes les plateformes. Lancez l'écoute, montez le son.</p>
+    </div>
+    <div class="release">
+      <div class="cover reveal">
+        <img src="img/r3a7306.jpg" alt="Pochette Arabesque Vol. III">
+        <span class="vol"><img src="img/logo-white.png" alt="Nassi" style="height:12px;width:auto"></span>
+        <a class="play" href="https://orcd.co/arabesque3" target="_blank" rel="noopener" aria-label="Écouter Arabesque Vol. III"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></a>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">Album</div>
+        <h3>Arabesque<br>Vol. III</h3>
+        <p>Le troisième chapitre de la trilogie Arabesque. Des mélodies solaires, des textes intimes, et le clip « Ya Lalla » déjà disponible sur YouTube.</p>
+        <div class="platforms">
+          <a href="https://orcd.co/arabesque3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.3 14.5c-.2.3-.6.4-.9.2-2.5-1.5-5.6-1.9-9.3-1-.4.1-.7-.1-.8-.5s.1-.7.5-.8c4-.9 7.5-.5 10.3 1.2.3.2.4.6.2.9zm1.1-2.6c-.2.4-.7.5-1.1.3-2.8-1.7-7.2-2.2-10.5-1.2-.5.1-.9-.1-1-.6s.1-.9.6-1c3.8-1.2 8.6-.6 11.9 1.4.3.2.4.7.1 1.1zm.1-2.7C14.2 9.3 8.5 9.1 5.3 10.1c-.5.2-1.1-.1-1.2-.7-.2-.5.1-1.1.7-1.2 3.7-1.1 9.9-.9 13.8 1.4.5.3.6.9.4 1.4-.3.5-1 .6-1.5.4z"/></svg>Spotify</a>
+          <a href="https://orcd.co/arabesque3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.9-.8-3.1-.8C6.8 7.4 5.3 8.3 4.5 9.8c-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.1.8c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7 0 0-2.6-1-2.7-4.3zM14.1 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg>Apple Music</a>
+          <a href="https://youtu.be/WWba-sSMEQk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23 7.2c-.3-1-1-1.8-2-2C19.2 4.7 12 4.7 12 4.7s-7.2 0-9 .5c-1 .3-1.8 1-2 2C.5 9 .5 12 .5 12s0 3 .5 4.8c.3 1 1 1.8 2 2 1.8.5 9 .5 9 .5s7.2 0 9-.5c1-.3 1.8-1 2-2 .5-1.8.5-4.8.5-4.8s0-3-.5-4.8zM9.7 15.3V8.7l6 3.3-6 3.3z"/></svg>Clip « Ya Lalla »</a>
+          <a href="https://orcd.co/arabesque3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.7-4-2.3z"/></svg>Toutes les plateformes</a>
+        </div>
+        <div class="tracklist" id="tracklist">
+          <div class="track" data-t="Ya Lalla"><span class="n">01</span><span class="t">Ya Lalla</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:12</span></div>
+          <div class="track" data-t="Layali"><span class="n">02</span><span class="t">Layali</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:28</span></div>
+          <div class="track" data-t="Boussa"><span class="n">03</span><span class="t">Boussa</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:57</span></div>
+          <div class="track" data-t="Rifia"><span class="n">04</span><span class="t">Rifia</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:41</span></div>
+          <div class="track" data-t="Dark Nador"><span class="n">05</span><span class="t">Dark Nador</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:05</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCERT ============ -->
+<section class="concert" id="concert">
+  <div class="spot"></div>
+  <div class="wrap">
+    <div class="concert-grid">
+      <div class="reveal">
+        <div class="eyebrow">Concert</div>
+        <h2 style="font-size:clamp(2rem,4.6vw,3.6rem);font-weight:800;margin-top:14px">Paris, le 19 décembre. Une seule soirée.</h2>
+        <p style="color:var(--fg-2);max-width:48ch">Nassi en live à La Maroquinerie, 23 rue Boyer, Paris 20e. Ouverture des portes à 20 h, prix final 24 € sans frais cachés, billet mobile sécurisé via DICE. Le compte à rebours est lancé.</p>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div><b id="cdD">00</b><small>jours</small></div>
+          <div><b id="cdH">00</b><small>heures</small></div>
+          <div><b id="cdM">00</b><small>min</small></div>
+          <div><b id="cdS">00</b><small>sec</small></div>
+        </div>
+        <div class="events" id="events"></div>
+        <div class="dice-note"><span class="dice">DICE</span> Billetterie officielle · paiement sécurisé · billets sur l'app DICE</div>
+      </div>
+      <div class="concert-photo reveal">
+        <img src="img/r3a7319.jpg" alt="Nassi sur scène sous un spot bleu">
+        <span class="tag">Sur scène</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div><div class="eyebrow">Boutique officielle</div><h2>Portez les couleurs d'Arabesque.</h2></div>
+      <p>Hoodies, t-shirts et posters en édition officielle. Expédition en Belgique et en Europe.</p>
+    </div>
+    <div class="filters" id="filters">
+      <button class="chip on" data-f="all">Tout</button>
+      <button class="chip" data-f="hoodie">Hoodies</button>
+      <button class="chip" data-f="tee">T-shirts</button>
+      <button class="chip" data-f="poster">Posters</button>
+      <button class="chip" data-f="arabesque">Arabesque</button>
+      <button class="chip" data-f="rifia">Rifia</button>
+      <button class="chip" data-f="nador">Dark Nador</button>
+    </div>
+    <div class="products" id="products"></div>
+    <div class="shop-foot reveal">
+      <div class="items">
+        <div><b>Paiement sécurisé</b>Bancontact, Visa, Mastercard, PayPal</div>
+        <div><b>Livraison</b>2 à 4 jours en Belgique</div>
+        <div><b>Retours</b>14 jours pour changer d'avis</div>
+      </div>
+      <button class="btn btn-ghost" id="openCart2">Voir mon panier</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LE CERCLE ============ -->
+<section class="cercle" id="cercle">
+  <div class="pattern"></div>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Le Cercle</div>
+      <h2>Soyez les premiers au courant.</h2>
+      <p>Pré-ventes de billets, sorties en avant-première, pièces de la collection en édition limitée : les membres du Cercle reçoivent tout avant tout le monde.</p>
+      <div class="perks"><span>Pré-vente 48 h</span><span>Code -10 % sur le shop</span><span>Nouveautés en avant-première</span></div>
+    </div>
+    <form class="form reveal" id="joinForm" novalidate>
+      <div class="f">
+        <label for="jEmail">E-mail</label>
+        <input id="jEmail" type="email" placeholder="vous@exemple.be" autocomplete="email" required>
+        <label for="jCity" style="margin-top:8px">Ville (pour les alertes concerts)</label>
+        <input id="jCity" type="text" placeholder="Bruxelles, Liège, Charleroi…" autocomplete="address-level2">
+        <button class="btn btn-primary" type="submit">Rejoindre le Cercle</button>
+        <p class="legal">En vous inscrivant, vous acceptez de recevoir les actualités de Nassi. Désinscription en un clic, à tout moment.</p>
+      </div>
+      <div class="ok">✦ Bienvenue dans le Cercle. Votre code -10 % arrive par e-mail.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo"><img src="img/logo-white.png" alt="Nassi"></div>
+        <p style="color:var(--fg-2);max-width:32ch;font-size:.92rem">Site officiel : musique, concerts et boutique.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg></a>
+          <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.5 2h-3.3v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.3a6.2 6.2 0 1 0 5.3 6.1V8.6a7.4 7.4 0 0 0 4.4 1.4V6.7A4.4 4.4 0 0 1 16.5 2z"/></svg></a>
+          <a href="https://youtu.be/WWba-sSMEQk" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23 7.2c-.3-1-1-1.8-2-2C19.2 4.7 12 4.7 12 4.7s-7.2 0-9 .5c-1 .3-1.8 1-2 2C.5 9 .5 12 .5 12s0 3 .5 4.8c.3 1 1 1.8 2 2 1.8.5 9 .5 9 .5s7.2 0 9-.5c1-.3 1.8-1 2-2 .5-1.8.5-4.8.5-4.8s0-3-.5-4.8zM9.7 15.3V8.7l6 3.3-6 3.3z"/></svg></a>
+          <a href="https://orcd.co/arabesque3" target="_blank" rel="noopener" aria-label="Spotify"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.3 14.5c-.2.3-.6.4-.9.2-2.5-1.5-5.6-1.9-9.3-1-.4.1-.7-.1-.8-.5s.1-.7.5-.8c4-.9 7.5-.5 10.3 1.2.3.2.4.6.2.9zm1.1-2.6c-.2.4-.7.5-1.1.3-2.8-1.7-7.2-2.2-10.5-1.2-.5.1-.9-.1-1-.6s.1-.9.6-1c3.8-1.2 8.6-.6 11.9 1.4.3.2.4.7.1 1.1zm.1-2.7C14.2 9.3 8.5 9.1 5.3 10.1c-.5.2-1.1-.1-1.2-.7-.2-.5.1-1.1.7-1.2 3.7-1.1 9.9-.9 13.8 1.4.5.3.6.9.4 1.4-.3.5-1 .6-1.5.4z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Explorer</h4><ul><li><a href="#univers">Univers</a></li><li><a href="#musique">Musique</a></li><li><a href="#concert">Concert &amp; billets</a></li><li><a href="#shop">Boutique</a></li></ul></div>
+      <div><h4>Boutique</h4><ul><li><a href="#shop">Hoodies</a></li><li><a href="#shop">T-shirts</a></li><li><a href="#shop">Posters</a></li><li><a href="#shop">Livraison &amp; retours</a></li></ul></div>
+      <div><h4>Infos</h4><ul><li><a href="#">Contact &amp; booking</a></li><li><a href="#">CGV &amp; CGU</a></li><li><a href="#">Confidentialité</a></li><li><a href="#">Mentions légales</a></li></ul></div>
+    </div>
+    <div class="big-logo" aria-hidden="true"><img src="img/logo-white.png" alt="" style="width:100%;height:auto;opacity:.08"></div>
+    <div class="foot-bottom">
+      <span>© 2026 Nassi. Tous droits réservés.</span>
+      <span>Site conçu par R Design Belgium</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn-primary" href="#concert">Billets</a>
+  <a class="btn btn-ghost" href="#shop">Shop</a>
+</div>
+
+<!-- cart drawer -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="veil" id="drawerVeil"></div>
+  <aside class="panel" role="dialog" aria-label="Panier">
+    <h3>Mon panier <button class="close" id="closeCart" aria-label="Fermer">×</button></h3>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+    <button class="btn btn-primary" id="checkout">Passer commande</button>
+    <p class="ship">Livraison offerte dès 60 € en Belgique</p>
+  </aside>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================== DONNÉES ===================== */
+const PRODUCTS=[
+  {id:1,name:"Hoodie Nassi Arabesque 1",price:35,type:"hoodie",col:"arabesque",img:"shop/p1.jpg",badge:"Best-seller",hot:true},
+  {id:2,name:"Hoodie Nassi Arabesque 2",price:35,type:"hoodie",col:"arabesque",img:"shop/p2.jpg"},
+  {id:3,name:"Hoodie Nassi Arabesque 3",price:35,type:"hoodie",col:"arabesque",img:"shop/p3.jpg",badge:"Nouveau"},
+  {id:4,name:"Tee Shirt Nassi Arabesque 1",price:20,type:"tee",col:"arabesque",img:"shop/p4.jpg"},
+  {id:5,name:"Tee Shirt Nassi Arabesque 2",price:20,type:"tee",col:"arabesque",img:"shop/p5.jpg"},
+  {id:6,name:"Tee Shirt Nassi Arabesque 3",price:20,type:"tee",col:"arabesque",img:"shop/p6.jpg"},
+  {id:7,name:"Poster Nassi Arabesque 1",price:20,from:true,type:"poster",col:"arabesque",img:"shop/p7.jpg"},
+  {id:8,name:"Poster Nassi Arabesque 2",price:20,from:true,type:"poster",col:"arabesque",img:"shop/p8.jpg"},
+  {id:9,name:"Poster Nassi Arabesque 3",price:20,from:true,type:"poster",col:"arabesque",img:"shop/p9.jpg"},
+  {id:10,name:"Tee Shirt Unisexe Rifia",price:20,type:"tee",col:"rifia",img:"shop/p10.jpg"},
+  {id:11,name:"Sweat à capuche unisexe Rifia",price:35,type:"hoodie",col:"rifia",img:"shop/p11.jpg"},
+  {id:12,name:"Tee Shirt Unisexe Dark Nador",price:20,type:"tee",col:"nador",img:"shop/p12.jpg"},
+  {id:13,name:"Sweat à capuche unisexe Dark Nador",price:35,type:"hoodie",col:"nador",img:"shop/p13.jpg",badge:"Édition sombre",hot:true},
+];
+const COL={arabesque:"Collection Arabesque",rifia:"Collection Rifia",nador:"Collection Dark Nador"};
+const SIZES={hoodie:["S","M","L","XL"],tee:["S","M","L","XL"],poster:["A3","A2","A1"]};
+
+/* ---- Billetterie DICE ----
+   En production : remplacer DICE_API_KEY et DICE_ARTIST par les valeurs fournies par DICE,
+   l'appel se fait depuis le serveur (jamais la clé côté client) via
+   GET https://partners-endpoint.dice.fm/api/v2/events?page[size]=10&filter[artists]=<id>
+   header: x-api-key: <clé>  → on mappe name / dates.event_start_date / venues[0] / ticket_types[].price / url
+   Alternative sans dev : widget officiel https://widgets.dice.fm/dice-event-list-widget.js
+   Les événements ci-dessous sont des exemples de démonstration. */
+const DICE_EVENTS_FALLBACK=[
+  {name:"Nassi live · +18",start:"2026-12-19T20:00:00+01:00",venue:"La Maroquinerie",city:"Paris 20e",price:"24 €",status:"En vente",url:"https://dice.fm/event/l8dqkr-nassi-19th-dec-la-maroquinerie-paris-tickets?lng=fr"},
+];
+function mapDice(json){ // forme réelle de l'API partenaires DICE → forme du site
+  return (json.data||[]).map(e=>({
+    name:e.name, start:e.dates?.event_start_date||e.date,
+    venue:e.venues?.[0]?.name||e.venue, city:e.venues?.[0]?.city?.name||e.location?.city,
+    price:(e.ticket_types?.[0]?.price?.face_value!=null)?(e.ticket_types[0].price.face_value/100).toFixed(0)+" €":"—",
+    status:e.sold_out?"Complet":"En vente", url:e.url
+  }));
+}
+async function loadEvents(){
+  let events=DICE_EVENTS_FALLBACK;
+  try{
+    const r=await fetch("/api/dice-events"); // endpoint serveur (WordPress: /wp-json/nassi/v1/dice)
+    if(r.ok){const j=await r.json(); const m=mapDice(j); if(m.length) events=m;}
+  }catch(e){}
+  renderEvents(events);
+}
+const MONTHS=["jan","fév","mar","avr","mai","juin","juil","août","sep","oct","nov","déc"];
+function renderEvents(ev){
+  const box=document.getElementById('events');
+  if(!ev.length){box.innerHTML='<div class="events-empty">Aucune date annoncée pour le moment. Rejoignez le Cercle pour être prévenu en premier.</div>';return;}
+  box.innerHTML=ev.map(e=>{const d=new Date(e.start);const cls=/complet/i.test(e.status)?' soldout':'';
+    return `<a class="event" href="${e.url}" target="_blank" rel="noopener">
+      <div class="date"><b>${String(d.getDate()).padStart(2,'0')}</b><span>${MONTHS[d.getMonth()]}</span></div>
+      <div><div class="venue">${e.venue}</div><div class="city">${e.city} · ${d.toLocaleTimeString('fr-BE',{hour:'2-digit',minute:'2-digit'})} · ${e.name}</div></div>
+      <div class="price"><b>${e.price}</b><span class="status${cls}">${e.status}</span></div></a>`}).join('');
+  startCountdown(new Date(ev[0].start));
+}
+function startCountdown(target){
+  const el={d:cdD,h:cdH,m:cdM,s:cdS};
+  function tick(){let diff=Math.max(0,target-Date.now());
+    const d=Math.floor(diff/864e5);diff-=d*864e5;const h=Math.floor(diff/36e5);diff-=h*36e5;const m=Math.floor(diff/6e4);const s=Math.floor((diff-m*6e4)/1e3);
+    el.d.textContent=String(d).padStart(2,'0');el.h.textContent=String(h).padStart(2,'0');el.m.textContent=String(m).padStart(2,'0');el.s.textContent=String(s).padStart(2,'0');}
+  tick();setInterval(tick,1000);
+}
+loadEvents();
+
+/* ===================== SHOP ===================== */
+const fmt=n=>n.toFixed(2).replace('.',',')+' €';
+const grid=document.getElementById('products');
+let filter='all';
+function renderProducts(){
+  const list=PRODUCTS.filter(p=>filter==='all'||p.type===filter||p.col===filter);
+  grid.innerHTML=list.map((p,i)=>`<article class="product" style="animation-delay:${i*40}ms" data-id="${p.id}">
+    <div class="ph"><img src="${p.img}" alt="${p.name}" loading="lazy">${p.badge?`<span class="badge${p.hot?' hot':''}">${p.badge}</span>`:''}</div>
+    <div class="info">
+      <span class="col">${COL[p.col]}</span>
+      <h3>${p.name}</h3>
+      <div class="row"><span class="price">${p.from?'<small>dès</small>':''}${fmt(p.price)}</span>
+        <div class="sizes">${SIZES[p.type].map((s,j)=>`<button class="size${j===1?' on':''}" data-s="${s}">${s}</button>`).join('')}</div></div>
+      <button class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Ajouter au panier</button>
+    </div></article>`).join('');
+}
+renderProducts();
+document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));filter=b.dataset.f;renderProducts();});
+grid.addEventListener('click',e=>{
+  const sz=e.target.closest('.size');if(sz){sz.parentElement.querySelectorAll('.size').forEach(x=>x.classList.toggle('on',x===sz));return;}
+  const add=e.target.closest('.add');if(!add)return;
+  const card=add.closest('.product');const p=PRODUCTS.find(x=>x.id==card.dataset.id);const size=card.querySelector('.size.on').dataset.s;
+  addToCart(p,size);add.classList.add('done');add.innerHTML='✓ Ajouté';setTimeout(()=>{add.classList.remove('done');add.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Ajouter au panier'},1400);
+});
+
+/* ---- panier ---- */
+let cart=[];
+try{cart=JSON.parse(localStorage.getItem('nassi-cart')||'[]')}catch(e){cart=[]}
+function saveCart(){try{localStorage.setItem('nassi-cart',JSON.stringify(cart))}catch(e){}}
+function addToCart(p,size){const k=cart.find(c=>c.id===p.id&&c.size===size);if(k)k.qty++;else cart.push({id:p.id,size,qty:1});saveCart();renderCart();toast(`${p.name} (${size}) ajouté`);}
+function renderCart(){
+  const n=cart.reduce((a,c)=>a+c.qty,0);const cc=document.getElementById('cartCount');cc.textContent=n;cc.classList.toggle('on',n>0);
+  const box=document.getElementById('cartItems');let total=0;
+  if(!cart.length){box.innerHTML='<div class="cart-empty">Votre panier est vide.<br>Les hoodies Arabesque n\'attendent que vous.</div>';}
+  else box.innerHTML=cart.map((c,i)=>{const p=PRODUCTS.find(x=>x.id===c.id);total+=p.price*c.qty;
+    return `<div class="ci"><img src="${p.img}" alt=""><div><div class="nm">${p.name}</div><div class="sz">Taille ${c.size}</div>
+      <div class="q"><button data-i="${i}" data-d="-1" aria-label="Moins">−</button><span>${c.qty}</span><button data-i="${i}" data-d="1" aria-label="Plus">+</button></div></div>
+      <div class="pr">${fmt(p.price*c.qty)}</div></div>`}).join('');
+  document.getElementById('cartTotal').textContent=fmt(total);
+}
+document.getElementById('cartItems').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  const c=cart[b.dataset.i];c.qty+=+b.dataset.d;if(c.qty<=0)cart.splice(b.dataset.i,1);saveCart();renderCart();});
+const drawer=document.getElementById('drawer');
+const openCart=()=>{drawer.classList.add('open');drawer.setAttribute('aria-hidden','false')};
+const closeCart=()=>{drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true')};
+cartBtn.onclick=openCart;openCart2.onclick=openCart;closeCart.onclick=closeCart;drawerVeil.onclick=closeCart;
+document.getElementById('checkout').onclick=()=>{if(!cart.length){toast('Ajoutez un article pour commander');return;}toast('Redirection vers le paiement sécurisé…');};
+renderCart();
+
+/* ===================== UI ===================== */
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2200);}
+const nav=document.getElementById('nav'),sticky=document.getElementById('stickyCta');
+addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20);sticky.classList.toggle('show',scrollY>500);},{passive:true});
+burger.onclick=()=>navLinks.classList.toggle('open');
+navLinks.addEventListener('click',()=>navLinks.classList.remove('open'));
+// marquee : duplication pour la boucle
+const mq=document.getElementById('marquee');mq.innerHTML+=mq.innerHTML;
+// tracklist : état "en lecture" (visuel)
+document.getElementById('tracklist').addEventListener('click',e=>{const t=e.target.closest('.track');if(!t)return;
+  document.querySelectorAll('.track').forEach(x=>x.classList.toggle('playing',x===t&&!x.classList.contains('playing')));});
+// grain du hero
+(function(){const c=document.getElementById('grain');const ctx=c.getContext('2d');c.width=320;c.height=320;
+  const img=ctx.createImageData(320,320);for(let i=0;i<img.data.length;i+=4){const v=Math.random()*255;img.data[i]=img.data[i+1]=img.data[i+2]=v;img.data[i+3]=40;}ctx.putImageData(img,0,0);
+  c.style.width='100%';c.style.height='100%';c.style.imageRendering='pixelated';})();
+// reveal : seules les sections hors écran au chargement sont animées
+(function(){const els=[...document.querySelectorAll('.reveal')];const vh=innerHeight;
+  els.forEach(el=>{if(el.getBoundingClientRect().top<vh)el.classList.add('in');});
+  if(!('IntersectionObserver' in window)){els.forEach(el=>el.classList.add('in'));return;}
+  const io=new IntersectionObserver(en=>en.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.12});
+  els.forEach(el=>io.observe(el));})();
+// formulaire Cercle
+document.getElementById('joinForm').addEventListener('submit',e=>{e.preventDefault();const em=document.getElementById('jEmail');
+  if(!em.value||!/.+@.+\..+/.test(em.value)){em.focus();toast('Entrez une adresse e-mail valide');return;}
+  e.currentTarget.classList.add('sent');});
+</script>
+
+</body>
+</html>
