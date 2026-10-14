@@ -234,7 +234,8 @@ section{padding-block:110px}
 .drawer .panel{position:absolute;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg-2);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 24px}
 .drawer.open{pointer-events:auto}.drawer.open .veil{opacity:1}.drawer.open .panel{transform:none}
 .drawer h3{font-size:1.2rem;font-weight:700;display:flex;justify-content:space-between;align-items:center}
-.drawer .close{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:1.2rem}
+.drawer .close{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);font-size:1.5rem;line-height:1;display:grid;place-items:center;flex:none}
+.drawer .close:hover{border-color:var(--amber);color:var(--amber)}
 .cart-items{flex:1;overflow:auto;margin:20px 0;display:flex;flex-direction:column;gap:12px;min-width:0}
 .ci{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:10px;border-radius:12px;background:var(--bg-3)}
 .ci img{width:64px;height:64px;border-radius:8px;object-fit:cover;background:#fff}
@@ -644,9 +645,13 @@ function renderCart(){
 document.getElementById('cartItems').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   const c=cart[b.dataset.i];c.qty+=+b.dataset.d;if(c.qty<=0)cart.splice(b.dataset.i,1);saveCart();renderCart();});
 const drawer=document.getElementById('drawer');
-const openCart=()=>{drawer.classList.add('open');drawer.setAttribute('aria-hidden','false')};
-const closeCart=()=>{drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true')};
-cartBtn.onclick=openCart;openCart2.onclick=openCart;closeCart.onclick=closeCart;drawerVeil.onclick=closeCart;
+const openDrawer=()=>{drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'};
+const closeDrawer=()=>{drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');document.body.style.overflow=''};
+document.getElementById('cartBtn').addEventListener('click',openDrawer);
+document.getElementById('openCart2').addEventListener('click',openDrawer);
+document.getElementById('closeCart').addEventListener('click',closeDrawer);
+document.getElementById('drawerVeil').addEventListener('click',closeDrawer);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
 document.getElementById('checkout').onclick=()=>{if(!cart.length){toast('Ajoutez un article pour commander');return;}toast('Redirection vers le paiement sécurisé…');};
 renderCart();
 
