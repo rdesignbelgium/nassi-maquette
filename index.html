@@ -215,6 +215,11 @@ section{padding-block:110px}
 .product .info{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
 .product .col{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
 .product h3{font-family:var(--font-body);font-weight:600;font-size:1.02rem;line-height:1.3}
+.swatches{display:flex;align-items:center;gap:8px}
+.sw{width:22px;height:22px;border-radius:50%;border:2px solid var(--bg-3);box-shadow:0 0 0 1px var(--line);padding:0;transition:.2s}
+.sw:hover{transform:scale(1.1)}
+.sw.on{box-shadow:0 0 0 2px var(--amber)}
+.swl{font-size:.75rem;color:var(--fg-2);margin-left:4px}
 .product .row{display:flex;justify-content:space-between;align-items:center;margin-top:auto;gap:10px}
 .product .price{font-family:var(--font-display);font-weight:600;font-size:1.05rem;font-variant-numeric:tabular-nums}
 .product .price small{font-family:var(--font-body);font-weight:400;font-size:.72rem;color:var(--fg-2);margin-right:4px}
@@ -340,7 +345,7 @@ footer a:hover{color:var(--amber)}
     <div class="hero-meta">
       <div><strong>Arabesque Vol. III</strong>Dernière sortie</div>
       <div><strong>Ya Lalla</strong>Clip officiel</div>
-      <div><strong>13 pièces</strong>Boutique officielle</div>
+      <div><strong>14 pièces</strong>Boutique officielle</div>
     </div>
   </div>
   <div class="scroll-cue">Scroll<i></i></div>
@@ -537,22 +542,27 @@ footer a:hover{color:var(--amber)}
 
 <script>
 /* ===================== DONNÉES ===================== */
+const SW={Noir:"#111",Gris:"#b7b7b7",Blanc:"#f4f4f4"};
+const NGB=(n)=>[{c:"Noir",img:`shop/p${n}n.jpg`},{c:"Gris",img:`shop/p${n}g.jpg`},{c:"Blanc",img:`shop/p${n}.jpg`}];
+const NB=(n)=>[{c:"Noir",img:`shop/p${n}n.jpg`},{c:"Blanc",img:`shop/p${n}.jpg`}];
 const PRODUCTS=[
-  {id:1,name:"Hoodie Nassi Arabesque 1",price:35,type:"hoodie",col:"arabesque",img:"shop/p1.jpg",badge:"Best-seller",hot:true},
-  {id:2,name:"Hoodie Nassi Arabesque 2",price:35,type:"hoodie",col:"arabesque",img:"shop/p2.jpg"},
-  {id:3,name:"Hoodie Nassi Arabesque 3",price:35,type:"hoodie",col:"arabesque",img:"shop/p3.jpg",badge:"Nouveau"},
-  {id:4,name:"Tee Shirt Nassi Arabesque 1",price:20,type:"tee",col:"arabesque",img:"shop/p4.jpg"},
-  {id:5,name:"Tee Shirt Nassi Arabesque 2",price:20,type:"tee",col:"arabesque",img:"shop/p5.jpg"},
-  {id:6,name:"Tee Shirt Nassi Arabesque 3",price:20,type:"tee",col:"arabesque",img:"shop/p6.jpg"},
-  {id:7,name:"Poster Nassi Arabesque 1",price:20,from:true,type:"poster",col:"arabesque",img:"shop/p7.jpg"},
-  {id:8,name:"Poster Nassi Arabesque 2",price:20,from:true,type:"poster",col:"arabesque",img:"shop/p8.jpg"},
-  {id:9,name:"Poster Nassi Arabesque 3",price:20,from:true,type:"poster",col:"arabesque",img:"shop/p9.jpg"},
-  {id:10,name:"Tee Shirt Unisexe Rifia",price:20,type:"tee",col:"rifia",img:"shop/p10.jpg"},
-  {id:11,name:"Sweat à capuche unisexe Rifia",price:35,type:"hoodie",col:"rifia",img:"shop/p11.jpg"},
-  {id:12,name:"Tee Shirt Unisexe Dark Nador",price:20,type:"tee",col:"nador",img:"shop/p12.jpg"},
-  {id:13,name:"Sweat à capuche unisexe Dark Nador",price:35,type:"hoodie",col:"nador",img:"shop/p13.jpg",badge:"Édition sombre",hot:true},
+  {id:14,name:"Hoodie Amazigh Prime",price:35,type:"hoodie",col:"amazigh",colors:[{c:"Noir",img:"shop/p14.jpg"}],badge:"Nouveau",hot:true},
+  {id:1,name:"Hoodie Nassi Arabesque 1",price:35,type:"hoodie",col:"arabesque",colors:NGB(1),badge:"Best-seller"},
+  {id:2,name:"Hoodie Nassi Arabesque 2",price:35,type:"hoodie",col:"arabesque",colors:NGB(2)},
+  {id:3,name:"Hoodie Nassi Arabesque 3",price:35,type:"hoodie",col:"arabesque",colors:NGB(3)},
+  {id:13,name:"Sweat à capuche unisexe Dark Nador",price:35,type:"hoodie",col:"nador",colors:NB(13),badge:"Édition sombre",hot:true},
+  {id:11,name:"Sweat à capuche unisexe Rifia",price:35,type:"hoodie",col:"rifia",colors:NB(11)},
+  {id:4,name:"Tee Shirt Nassi Arabesque 1",price:20,type:"tee",col:"arabesque",colors:NGB(4)},
+  {id:5,name:"Tee Shirt Nassi Arabesque 2",price:20,type:"tee",col:"arabesque",colors:NGB(5)},
+  {id:6,name:"Tee Shirt Nassi Arabesque 3",price:20,type:"tee",col:"arabesque",colors:NGB(6)},
+  {id:12,name:"Tee Shirt Unisexe Dark Nador",price:20,type:"tee",col:"nador",colors:NB(12)},
+  {id:10,name:"Tee Shirt Unisexe Rifia",price:20,type:"tee",col:"rifia",colors:NB(10)},
+  {id:7,name:"Poster Nassi Arabesque 1",price:20,from:true,type:"poster",col:"arabesque",colors:[{c:"",img:"shop/p7.jpg"}]},
+  {id:8,name:"Poster Nassi Arabesque 2",price:20,from:true,type:"poster",col:"arabesque",colors:[{c:"",img:"shop/p8.jpg"}]},
+  {id:9,name:"Poster Nassi Arabesque 3",price:20,from:true,type:"poster",col:"arabesque",colors:[{c:"",img:"shop/p9.jpg"}]},
 ];
-const COL={arabesque:"Collection Arabesque",rifia:"Collection Rifia",nador:"Collection Dark Nador"};
+PRODUCTS.forEach(p=>{p.img=p.colors[0].img});
+const COL={arabesque:"Collection Arabesque",rifia:"Collection Rifia",nador:"Collection Dark Nador",amazigh:"Amazigh Prime"};
 const SIZES={hoodie:["S","M","L","XL"],tee:["S","M","L","XL"],poster:["A3","A2","A1"]};
 
 /* ---- Billetterie DICE ----
@@ -607,11 +617,12 @@ const grid=document.getElementById('products');
 let filter='all';
 function renderProducts(){
   const list=PRODUCTS.filter(p=>filter==='all'||p.type===filter||p.col===filter);
-  grid.innerHTML=list.map((p,i)=>`<article class="product" style="animation-delay:${i*40}ms" data-id="${p.id}">
-    <div class="ph"><img src="${p.img}" alt="${p.name}" loading="lazy">${p.badge?`<span class="badge${p.hot?' hot':''}">${p.badge}</span>`:''}</div>
+  grid.innerHTML=list.map((p,i)=>`<article class="product" style="animation-delay:${i*40}ms" data-id="${p.id}" data-color="${p.colors[0].c}">
+    <div class="ph"><img src="${p.img}" alt="${p.name}${p.colors[0].c?' — '+p.colors[0].c:''}" loading="lazy">${p.badge?`<span class="badge${p.hot?' hot':''}">${p.badge}</span>`:''}</div>
     <div class="info">
       <span class="col">${COL[p.col]}</span>
       <h3>${p.name}</h3>
+      ${p.colors.length>1?`<div class="swatches" role="radiogroup" aria-label="Couleur">${p.colors.map((c,j)=>`<button class="sw${j===0?' on':''}" data-c="${c.c}" data-img="${c.img}" style="background:${SW[c.c]}" title="${c.c}" aria-label="${c.c}"></button>`).join('')}<span class="swl">${p.colors[0].c}</span></div>`:''}
       <div class="row"><span class="price">${p.from?'<small>dès</small>':''}${fmt(p.price)}</span>
         <div class="sizes">${SIZES[p.type].map((s,j)=>`<button class="size${j===1?' on':''}" data-s="${s}">${s}</button>`).join('')}</div></div>
       <button class="add"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Ajouter au panier</button>
@@ -622,22 +633,24 @@ document.getElementById('filters').addEventListener('click',e=>{const b=e.target
   document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));filter=b.dataset.f;renderProducts();});
 grid.addEventListener('click',e=>{
   const sz=e.target.closest('.size');if(sz){sz.parentElement.querySelectorAll('.size').forEach(x=>x.classList.toggle('on',x===sz));return;}
+  const sw=e.target.closest('.sw');if(sw){const card=sw.closest('.product');card.querySelectorAll('.sw').forEach(x=>x.classList.toggle('on',x===sw));
+    card.querySelector('.ph img').src=sw.dataset.img;card.dataset.color=sw.dataset.c;card.querySelector('.swl').textContent=sw.dataset.c;return;}
   const add=e.target.closest('.add');if(!add)return;
   const card=add.closest('.product');const p=PRODUCTS.find(x=>x.id==card.dataset.id);const size=card.querySelector('.size.on').dataset.s;
-  addToCart(p,size);add.classList.add('done');add.innerHTML='✓ Ajouté';setTimeout(()=>{add.classList.remove('done');add.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Ajouter au panier'},1400);
+  addToCart(p,size,card.dataset.color);add.classList.add('done');add.innerHTML='✓ Ajouté';setTimeout(()=>{add.classList.remove('done');add.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Ajouter au panier'},1400);
 });
 
 /* ---- panier ---- */
 let cart=[];
 try{cart=JSON.parse(localStorage.getItem('nassi-cart')||'[]')}catch(e){cart=[]}
 function saveCart(){try{localStorage.setItem('nassi-cart',JSON.stringify(cart))}catch(e){}}
-function addToCart(p,size){const k=cart.find(c=>c.id===p.id&&c.size===size);if(k)k.qty++;else cart.push({id:p.id,size,qty:1});saveCart();renderCart();toast(`${p.name} (${size}) ajouté`);}
+function addToCart(p,size,color){color=color||'';const k=cart.find(c=>c.id===p.id&&c.size===size&&(c.color||'')===color);if(k)k.qty++;else cart.push({id:p.id,size,color,qty:1});saveCart();renderCart();toast(`${p.name}${color?' · '+color:''} (${size}) ajouté`);}
 function renderCart(){
   const n=cart.reduce((a,c)=>a+c.qty,0);const cc=document.getElementById('cartCount');cc.textContent=n;cc.classList.toggle('on',n>0);
   const box=document.getElementById('cartItems');let total=0;
   if(!cart.length){box.innerHTML='<div class="cart-empty">Votre panier est vide.<br>Les hoodies Arabesque n\'attendent que vous.</div>';}
-  else box.innerHTML=cart.map((c,i)=>{const p=PRODUCTS.find(x=>x.id===c.id);total+=p.price*c.qty;
-    return `<div class="ci"><img src="${p.img}" alt=""><div><div class="nm">${p.name}</div><div class="sz">Taille ${c.size}</div>
+  else box.innerHTML=cart.map((c,i)=>{const p=PRODUCTS.find(x=>x.id===c.id);if(!p)return '';total+=p.price*c.qty;const v=p.colors.find(x=>x.c===(c.color||''))||p.colors[0];
+    return `<div class="ci"><img src="${v.img}" alt=""><div><div class="nm">${p.name}</div><div class="sz">${v.c?v.c+' · ':''}Taille ${c.size}</div>
       <div class="q"><button data-i="${i}" data-d="-1" aria-label="Moins">−</button><span>${c.qty}</span><button data-i="${i}" data-d="1" aria-label="Plus">+</button></div></div>
       <div class="pr">${fmt(p.price*c.qty)}</div></div>`}).join('');
   document.getElementById('cartTotal').textContent=fmt(total);
