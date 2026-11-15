@@ -28,7 +28,7 @@
 			?>
 		</nav>
 		<div class="nav-actions">
-			<a class="btn btn-primary btn-nav" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener">Billets</a>
+			<a class="btn btn-primary btn-nav" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener">Billetterie</a>
 			<?php if ( function_exists( 'wc_get_cart_url' ) ) : $n = WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
 			<a class="cart-btn" href="<?php echo esc_url( wc_get_cart_url() ); ?>" aria-label="Panier">
 				<?php echo nassi_icon( 'cart' ); ?>

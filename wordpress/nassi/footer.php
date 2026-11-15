@@ -14,7 +14,7 @@
 			<div><h4>Explorer</h4><ul>
 				<li><a href="<?php echo esc_url( home_url( '/#univers' ) ); ?>">Univers</a></li>
 				<li><a href="<?php echo esc_url( home_url( '/#musique' ) ); ?>">Musique</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#concert' ) ); ?>">Concert &amp; billets</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#concert' ) ); ?>">Concert &amp; billetterie</a></li>
 				<?php if ( function_exists( 'wc_get_page_permalink' ) ) : ?><li><a href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>">Boutique</a></li><?php endif; ?>
 			</ul></div>
 			<div><h4>Boutique</h4><ul>
@@ -42,7 +42,7 @@
 	</div>
 </footer>
 <div class="sticky-cta" id="stickyCta">
-	<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener">Billets</a>
+	<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener">Je prends ma place</a>
 	<?php if ( function_exists( 'wc_get_page_permalink' ) ) : ?><a class="btn btn-ghost" href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>">Shop</a><?php endif; ?>
 </div>
 <div class="toast" id="toast"></div>

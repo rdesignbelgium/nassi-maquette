@@ -15,8 +15,8 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title' ) ), 3, '' );
 		<h1><?php echo esc_html( $title[0] ); ?><br><span class="outline"><?php echo esc_html( $title[1] ); ?></span><em><?php echo esc_html( $title[2] ); ?></em></h1>
 		<p><?php echo esc_html( nassi_mod( 'nassi_hero_text' ) ); ?></p>
 		<div class="hero-cta">
-			<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( 'ticket' ); ?>Réserver mon billet</a>
-			<a class="btn btn-ghost" href="#musique"><?php echo nassi_icon( 'play' ); ?>Écouter les EP</a>
+			<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( 'ticket' ); ?>Je prends ma place</a>
+			<a class="btn btn-ghost" href="#musique"><?php echo nassi_icon( 'play' ); ?>Découvrir ma musique</a>
 		</div>
 		<div class="hero-meta">
 			<div><strong><?php echo esc_html( nassi_mod( 'nassi_ep1_title' ) ); ?></strong>Dernier EP</div>
