@@ -35,9 +35,9 @@
     tick(); setInterval(tick, 1000);
   }
 
-  /* Tracklist : état visuel « en lecture » */
-  const tl = $('#tracklist');
-  if (tl) tl.addEventListener('click', e => { const t = e.target.closest('.track'); if (!t) return; $$('.track', tl).forEach(x => x.classList.toggle('playing', x === t && !x.classList.contains('playing'))); });
+  /* Tracklists : état visuel « en lecture » + bouton voir tout */
+  $$('.tracklist').forEach(tl => tl.addEventListener('click', e => { const t = e.target.closest('.track'); if (!t) return; $$('.track').forEach(x => x.classList.toggle('playing', x === t && !x.classList.contains('playing'))); }));
+  $$('.ep .seeall').forEach(b => b.addEventListener('click', () => { const ep = b.closest('.ep'); const o = ep.classList.toggle('open'); b.textContent = o ? b.dataset.less : b.dataset.more; }));
 
   /* Grain du hero */
   const g = $('#grain');

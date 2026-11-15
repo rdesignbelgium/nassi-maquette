@@ -16,10 +16,10 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 		<p><?php echo esc_html( nassi_mod( 'nassi_hero_text' ) ); ?></p>
 		<div class="hero-cta">
 			<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url', '#concert' ) ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( 'ticket' ); ?>Réserver mon billet</a>
-			<a class="btn btn-ghost" href="#musique"><?php echo nassi_icon( 'play' ); ?>Écouter</a>
+			<a class="btn btn-ghost" href="#musique"><?php echo nassi_icon( 'play' ); ?>Écouter les EP</a>
 		</div>
 		<div class="hero-meta">
-			<div><strong><?php echo esc_html( nassi_mod( 'nassi_album', 'Bent nass' ) ); ?></strong>Dernière sortie</div>
+			<div><strong><?php echo esc_html( nassi_mod( 'nassi_ep1_title', 'Au cœur du Rif' ) ); ?></strong>Dernier EP</div>
 			<div><strong><?php echo esc_html( nassi_mod( 'nassi_concert_venue', 'La Maroquinerie' ) ); ?></strong>Prochain concert</div>
 			<?php if ( function_exists( 'wc_get_products' ) ) : ?><div><strong><?php echo (int) wp_count_posts( 'product' )->publish; ?> pièces</strong>Boutique officielle</div><?php endif; ?>
 		</div>
@@ -59,30 +59,43 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 <section class="musique" id="musique">
 	<div class="wrap">
 		<div class="sec-head reveal">
-			<div><div class="eyebrow">Musique</div><h2>Dernière sortie</h2></div>
-			<p>Disponible sur toutes les plateformes. Lancez l’écoute, montez le son.</p>
+			<div><div class="eyebrow">Musique</div><h2><?php echo esc_html( nassi_mod( 'nassi_music_title', 'Les derniers projets' ) ); ?></h2></div>
+			<p><?php echo esc_html( nassi_mod( 'nassi_music_text' ) ); ?></p>
 		</div>
-		<div class="release">
-			<div class="cover reveal">
-				<img src="<?php echo esc_url( nassi_img( 'nassi_cover', 'r3a7306.jpg' ) ); ?>" alt="<?php echo esc_attr( nassi_mod( 'nassi_album' ) ); ?>">
-				<span class="vol"><img src="<?php echo esc_url( NASSI_URI . '/assets/img/logo-white.png' ); ?>" alt="Nassi"></span>
-				<a class="play" href="<?php echo esc_url( nassi_mod( 'nassi_link_all' ) ); ?>" target="_blank" rel="noopener" aria-label="Écouter"><?php echo nassi_icon( 'play' ); ?></a>
-			</div>
-			<div class="reveal">
-				<div class="eyebrow">Nouveau</div>
-				<h3><?php echo esc_html( nassi_mod( 'nassi_album' ) ); ?></h3>
-				<p><?php echo esc_html( nassi_mod( 'nassi_album_text' ) ); ?></p>
-				<div class="platforms">
-					<?php foreach ( [ 'spotify' => 'Spotify', 'apple' => 'Apple Music', 'youtube' => 'YouTube', 'all' => 'Toutes les plateformes' ] as $k => $l ) :
-						$u = nassi_mod( "nassi_link_$k" ); if ( ! $u ) continue; ?>
-						<a href="<?php echo esc_url( $u ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( $k === 'all' ? 'play' : $k ); ?><?php echo esc_html( $l ); ?></a>
+		<div class="eps">
+			<?php $covers = [ 1 => 'rif.jpg', 2 => 'delali.jpg', 3 => 'arabesque3.jpg' ];
+			for ( $i = 1; $i <= 3; $i++ ) :
+				$title = nassi_mod( "nassi_ep{$i}_title" ); if ( ! $title ) continue;
+				$link  = nassi_mod( "nassi_ep{$i}_link", '#' );
+				$tracks = array_values( array_filter( array_map( function ( $t ) { $p = explode( ':', $t, 2 ); return count( $p ) === 2 ? [ trim( $p[0] ), trim( $p[1] ) ] : null; }, explode( '|', (string) nassi_mod( "nassi_ep{$i}_tracks" ) ) ) ) ); ?>
+			<article class="ep reveal">
+				<a class="cover" href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener" aria-label="Écouter <?php echo esc_attr( $title ); ?>">
+					<img src="<?php echo esc_url( nassi_img( "nassi_ep{$i}_cover", $covers[ $i ] ) ); ?>" alt="Pochette <?php echo esc_attr( $title ); ?>">
+					<?php if ( nassi_mod( "nassi_ep{$i}_new" ) ) : ?><span class="tagnew">Nouveau</span><?php endif; ?>
+					<span class="play"><?php echo nassi_icon( 'play' ); ?></span>
+				</a>
+				<div class="meta"><?php echo esc_html( nassi_mod( "nassi_ep{$i}_meta" ) ); ?></div>
+				<h3><?php echo esc_html( $title ); ?></h3>
+				<p class="desc"><?php echo esc_html( nassi_mod( "nassi_ep{$i}_desc" ) ); ?></p>
+				<?php if ( $tracks ) : ?>
+				<div class="tracklist">
+					<?php foreach ( $tracks as $n => $t ) : ?>
+					<div class="track<?php echo $n >= 6 ? ' more' : ''; ?>"><span class="n"><?php printf( '%02d', $n + 1 ); ?></span><span class="t"><?php echo esc_html( $t[0] ); ?></span><span class="bars"><i></i><i></i><i></i></span><span class="d"><?php echo esc_html( $t[1] ); ?></span></div>
 					<?php endforeach; ?>
 				</div>
-				<div class="tracklist" id="tracklist">
-					<?php $n = 0; foreach ( explode( '|', nassi_mod( 'nassi_tracks' ) ) as $t ) { $p = explode( ':', $t, 2 ); if ( count( $p ) < 2 ) continue; $n++; ?>
-					<div class="track"><span class="n"><?php printf( '%02d', $n ); ?></span><span class="t"><?php echo esc_html( trim( $p[0] ) ); ?></span><span class="bars"><i></i><i></i><i></i></span><span class="d"><?php echo esc_html( trim( $p[1] ) ); ?></span></div>
-					<?php } ?>
-				</div>
+				<?php if ( count( $tracks ) > 6 ) : ?><button class="seeall" type="button" data-more="Voir les <?php echo count( $tracks ); ?> titres" data-less="Réduire">Voir les <?php echo count( $tracks ); ?> titres</button><?php endif; ?>
+				<?php endif; ?>
+				<div class="btns"><a class="btn btn-primary" href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( 'play' ); ?>Écouter</a></div>
+			</article>
+			<?php endfor; ?>
+		</div>
+		<div class="platforms-all reveal">
+			<span>Retrouver Nassi sur</span>
+			<div class="platforms">
+				<?php foreach ( [ 'spotify' => 'Spotify', 'apple' => 'Apple Music', 'deezer' => 'Deezer', 'youtube' => 'YouTube' ] as $k => $l ) :
+					$u = nassi_mod( "nassi_link_$k" ); if ( ! $u ) continue; ?>
+					<a href="<?php echo esc_url( $u ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( $k ); ?><?php echo esc_html( $l ); ?></a>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>
