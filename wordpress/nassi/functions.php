@@ -39,8 +39,8 @@ add_action( 'after_setup_theme', function () {
 /* ---------- Scripts et styles ---------- */
 add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_style( 'nassi-fonts', 'https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap', [], null );
-	wp_enqueue_style( 'nassi-style', get_stylesheet_uri(), [ 'nassi-fonts' ], NASSI_VERSION );
-	wp_enqueue_script( 'nassi-main', NASSI_URI . '/assets/js/main.js', [], NASSI_VERSION, true );
+	wp_enqueue_style( 'nassi-style', NASSI_URI . '/assets/v' . NASSI_VERSION . '/style.css', [ 'nassi-fonts' ], null );
+	wp_enqueue_script( 'nassi-main', NASSI_URI . '/assets/v' . NASSI_VERSION . '/js/main.js', [], null, true );
 	wp_localize_script( 'nassi-main', 'NASSI', [
 		'rest'       => esc_url_raw( rest_url( 'nassi/v1/' ) ),
 		'nonce'      => wp_create_nonce( 'wp_rest' ),
