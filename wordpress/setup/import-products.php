@@ -1,13 +1,13 @@
 <?php
 /**
  * Import du CSV produits avec l'importateur natif WooCommerce.
- * Usage : wp eval-file import-products.php produits-nassi.csv [--purge]
- *   --purge : supprime d'abord tous les produits existants.
+ * Usage : wp eval-file import-products.php produits-nassi.csv [purge]
+ *   purge : supprime d'abord tous les produits existants.
  */
 if ( ! defined( 'WP_CLI' ) ) exit( 'WP-CLI uniquement' );
 $file = $args[0] ?? '';
 if ( ! $file || ! file_exists( $file ) ) WP_CLI::error( 'Fichier CSV introuvable : ' . $file );
-if ( in_array( '--purge', $args, true ) ) {
+if ( in_array( 'purge', $args, true ) ) {
 	$ids = get_posts( [ 'post_type' => [ 'product', 'product_variation' ], 'numberposts' => -1, 'post_status' => 'any', 'fields' => 'ids' ] );
 	foreach ( $ids as $id ) wp_delete_post( $id, true );
 	WP_CLI::log( '  purge : ' . count( $ids ) . ' éléments supprimés' );
