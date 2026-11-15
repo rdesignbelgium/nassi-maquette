@@ -27,7 +27,7 @@ WP_CLI::log( '  colonnes reconnues : ' . count( array_filter( $mapping ) ) . '/'
 
 $params = [
 	'parse'            => true,
-	'update_existing'  => true,
+	'update_existing'  => false,
 	'mapping'          => [ 'from' => $headers, 'to' => array_values( $mapping ) ],
 	'lines'            => 0,
 	'start_pos'        => 0,
