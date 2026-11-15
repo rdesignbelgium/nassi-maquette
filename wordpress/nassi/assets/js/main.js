@@ -36,7 +36,22 @@
   }
 
   /* Tracklists : état visuel « en lecture » + bouton voir tout */
-  $$('.tracklist').forEach(tl => tl.addEventListener('click', e => { const t = e.target.closest('.track'); if (!t) return; $$('.track').forEach(x => x.classList.toggle('playing', x === t && !x.classList.contains('playing'))); }));
+  /* Lecteur d'extraits (30 s, Deezer) */
+  (() => { const audio = new Audio(); audio.preload = 'none'; let cur = null; const cache = {};
+    const PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+    $$('.track[data-dz]').forEach(t => { t.insertAdjacentHTML('beforeend', '<span class="pb"></span>'); t.insertAdjacentHTML('afterbegin', '<span class="play">' + PLAY + '</span>'); });
+    function preview(id) { return cache[id] || (cache[id] = new Promise((res, rej) => { const cb = 'dz' + id + '_' + Date.now(); window[cb] = d => { delete window[cb]; sc.remove(); d && d.preview ? res(d.preview) : rej(); }; const sc = document.createElement('script'); sc.src = 'https://api.deezer.com/track/' + id + '?output=jsonp&callback=' + cb; sc.onerror = () => { delete window[cb]; sc.remove(); rej(); }; document.head.appendChild(sc); }).catch(e => { delete cache[id]; throw e; })); }
+    function stop() { audio.pause(); if (cur) { cur.classList.remove('playing', 'loading'); cur.querySelector('.pb').style.width = 0; } cur = null; }
+    async function play(t) { if (cur === t) { if (audio.paused) audio.play(); else { audio.pause(); t.classList.remove('playing'); } return; }
+      stop(); cur = t; t.classList.add('loading');
+      try { const src = await preview(t.dataset.dz); if (cur !== t) return; audio.src = src; await audio.play(); t.classList.remove('loading'); t.classList.add('playing'); }
+      catch (e) { if (cur === t) { t.classList.remove('loading'); const a = t.closest('.ep') && t.closest('.ep').querySelector('a[href]'); if (a) window.open(a.href, '_blank'); cur = null; } } }
+    audio.addEventListener('timeupdate', () => { if (cur && audio.duration) cur.querySelector('.pb').style.width = (audio.currentTime / audio.duration * 100) + '%'; });
+    audio.addEventListener('play', () => { if (cur) cur.classList.add('playing'); });
+    audio.addEventListener('ended', () => { const t = cur; stop(); const next = t && t.nextElementSibling; if (next && next.matches('.track[data-dz]') && (!next.classList.contains('more') || t.closest('.ep').classList.contains('open'))) play(next); });
+    $$('.tracklist').forEach(tl => { tl.addEventListener('click', e => { const t = e.target.closest('.track[data-dz]'); if (t) play(t); });
+      tl.addEventListener('keydown', e => { const t = e.target.closest('.track[data-dz]'); if (t && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); play(t); } }); });
+  })();
   $$('.ep .seeall').forEach(b => b.addEventListener('click', () => { const ep = b.closest('.ep'); const o = ep.classList.toggle('open'); b.textContent = o ? b.dataset.less : b.dataset.more; }));
 
   /* Grain du hero */

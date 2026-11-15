@@ -4,7 +4,7 @@ Theme URI: https://rdesignbelgium.be
 Author: R Design Belgium
 Author URI: https://rdesignbelgium.be
 Description: Thème officiel du chanteur Nassi — univers, musique, billetterie DICE et boutique WooCommerce (impression à la demande via Gelato). Compatible Elementor.
-Version: 1.0.0
+Version: 1.1.0
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 8.0
@@ -181,6 +181,17 @@ section{padding-block:110px}
 .track.playing .bars i{animation:eq .8s ease-in-out infinite alternate}
 .track.playing .bars i:nth-child(2){animation-delay:.2s}.track.playing .bars i:nth-child(3){animation-delay:.4s}
 .track.playing .t{color:var(--amber)}
+.track{position:relative;overflow:hidden}
+.track .pb{position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--amber);transition:width .25s linear}
+.track.loading .t{opacity:.6}
+.track .play{position:absolute;left:0;top:0;bottom:0;width:36px;display:grid;place-items:center;opacity:0;transition:opacity .2s;color:var(--amber)}
+.track:hover .play,.track:focus-visible .play{opacity:1}
+.track:hover .n,.track:focus-visible .n{opacity:0}
+.track.playing .play{opacity:0}
+.track .play svg{width:14px;height:14px;fill:currentColor}
+.ep .track .play{width:28px}
+.preview-note{margin-top:10px;font-size:.75rem;color:var(--fg-2);letter-spacing:.04em}
+
 @keyframes eq{from{height:20%}to{height:100%}}
 @media (max-width:1000px){.eps{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.eps{grid-template-columns:1fr}}

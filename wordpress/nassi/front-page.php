@@ -67,7 +67,7 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title' ) ), 3, '' );
 			for ( $i = 1; $i <= 3; $i++ ) :
 				$title = nassi_mod( "nassi_ep{$i}_title" ); if ( ! $title ) continue;
 				$link  = nassi_mod( "nassi_ep{$i}_link" );
-				$tracks = array_values( array_filter( array_map( function ( $t ) { $p = explode( ':', $t, 2 ); return count( $p ) === 2 ? [ trim( $p[0] ), trim( $p[1] ) ] : null; }, explode( '|', (string) nassi_mod( "nassi_ep{$i}_tracks" ) ) ) ) ); ?>
+				$tracks = array_values( array_filter( array_map( function ( $t ) { $p = array_map( 'trim', explode( ':', $t ) ); if ( count( $p ) < 3 ) return null; return [ $p[0], $p[1] . ':' . $p[2], $p[3] ?? '' ]; }, explode( '|', (string) nassi_mod( "nassi_ep{$i}_tracks" ) ) ) ) ); ?>
 			<article class="ep reveal">
 				<a class="cover" href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener" aria-label="Écouter <?php echo esc_attr( $title ); ?>">
 					<img src="<?php echo esc_url( nassi_img( "nassi_ep{$i}_cover", $covers[ $i ] ) ); ?>" alt="Pochette <?php echo esc_attr( $title ); ?>">
@@ -80,9 +80,10 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title' ) ), 3, '' );
 				<?php if ( $tracks ) : ?>
 				<div class="tracklist">
 					<?php foreach ( $tracks as $n => $t ) : ?>
-					<div class="track<?php echo $n >= 6 ? ' more' : ''; ?>"><span class="n"><?php printf( '%02d', $n + 1 ); ?></span><span class="t"><?php echo esc_html( $t[0] ); ?></span><span class="bars"><i></i><i></i><i></i></span><span class="d"><?php echo esc_html( $t[1] ); ?></span></div>
+					<div class="track<?php echo $n >= 6 ? ' more' : ''; ?>"<?php if ( $t[2] ) printf( ' data-dz="%s" role="button" tabindex="0" aria-label="%s"', esc_attr( $t[2] ), esc_attr( 'Écouter un extrait de ' . $t[0] ) ); ?>><span class="n"><?php printf( '%02d', $n + 1 ); ?></span><span class="t"><?php echo esc_html( $t[0] ); ?></span><span class="bars"><i></i><i></i><i></i></span><span class="d"><?php echo esc_html( $t[1] ); ?></span></div>
 					<?php endforeach; ?>
 				</div>
+				<p class="preview-note">Cliquez sur un titre pour écouter un extrait de 30 secondes.</p>
 				<?php if ( count( $tracks ) > 6 ) : ?><button class="seeall" type="button" data-more="Voir les <?php echo count( $tracks ); ?> titres" data-less="Réduire">Voir les <?php echo count( $tracks ); ?> titres</button><?php endif; ?>
 				<?php endif; ?>
 				<div class="btns"><a class="btn btn-primary" href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( 'play' ); ?>Écouter</a></div>

@@ -61,7 +61,7 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp ) {
 		$f( "nassi_ep{$i}_meta", "Projet $i — infos (type · date · nb titres)", 'musique', 'text', $d[1] );
 		$f( "nassi_ep{$i}_desc", "Projet $i — description", 'musique', 'textarea', $d[2] );
 		$f( "nassi_ep{$i}_link", "Projet $i — lien d’écoute", 'musique', 'url', $d[3] );
-		$f( "nassi_ep{$i}_tracks", "Projet $i — titres (Titre:durée séparés par |)", 'musique', 'textarea', $d[4] );
+		$f( "nassi_ep{$i}_tracks", "Projet $i — titres (Titre:m:ss:idDeezer, séparés par |)", 'musique', 'textarea', $d[4] );
 		$f( "nassi_ep{$i}_new", "Projet $i — badge « Nouveau »", 'musique', 'checkbox', $d[5] );
 	}
 	$f( 'nassi_link_spotify', 'Spotify (artiste)', 'musique', 'url', 'https://open.spotify.com/intl-fr/artist/1qKKI6tBqJZCZfAmXjYFjN' );

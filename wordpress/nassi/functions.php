@@ -6,7 +6,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'NASSI_VERSION', '1.0.0' );
+define( 'NASSI_VERSION', '1.1.0' );
 define( 'NASSI_DIR', get_template_directory() );
 define( 'NASSI_URI', get_template_directory_uri() );
 
