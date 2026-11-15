@@ -139,17 +139,31 @@ section{padding-block:110px}
 /* musique */
 .musique{background:var(--bg-2);position:relative;overflow:hidden}
 .musique::before{content:"";position:absolute;width:70vw;height:70vw;max-width:900px;max-height:900px;border-radius:50%;background:radial-gradient(circle,rgba(242,162,27,.14),transparent 60%);top:-20%;right:-20%;pointer-events:none}
-.release{display:grid;grid-template-columns:420px 1fr;gap:56px;align-items:center}
-.cover{position:relative;aspect-ratio:1;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.8),0 0 0 1px var(--line);transform:rotate(-2deg);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.cover:hover{transform:rotate(0) scale(1.02)}
-.cover img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
-.cover .vol{position:absolute;left:22px;top:22px;font-family:var(--font-display);font-weight:900;font-size:.8rem;letter-spacing:.3em;color:var(--fg)}
-.cover .play{position:absolute;right:22px;bottom:22px;width:64px;height:64px;border-radius:50%;background:var(--amber);display:grid;place-items:center;border:none;box-shadow:0 10px 30px rgba(242,162,27,.5);transition:transform .3s}
+.eps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.ep{display:flex;flex-direction:column;gap:18px;background:var(--bg-3);border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .3s}
+.ep:hover{transform:translateY(-6px);border-color:rgba(242,162,27,.5)}
+.ep.featured{grid-column:span 1}
+.cover{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.8);display:block}
+.cover img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.ep:hover .cover img{transform:scale(1.04)}
+.cover .play{position:absolute;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;background:var(--amber);display:grid;place-items:center;border:none;box-shadow:0 10px 30px rgba(242,162,27,.5);transition:transform .3s}
 .cover .play:hover{transform:scale(1.08)}
-.cover .play svg{width:22px;height:22px;fill:#1a0f05;margin-left:3px}
-.release h3{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;margin-top:14px}
-.release p{color:var(--fg-2);max-width:50ch}
-.platforms{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cover .play svg{width:20px;height:20px;fill:#1a0f05;margin-left:3px}
+.cover .tagnew{position:absolute;left:16px;bottom:22px;background:var(--amber);color:#1a0f05;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
+.ep .meta{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.ep h3{font-size:1.5rem;font-weight:800;line-height:1.1}
+.ep .desc{color:var(--fg-2);font-size:.95rem;line-height:1.5}
+.ep .tracklist{margin-top:4px;border-top:1px solid var(--line)}
+.ep .track{padding:10px 0;grid-template-columns:28px 1fr auto auto;gap:12px;font-size:.92rem}
+.ep .track.more{display:none}
+.ep.open .track.more{display:grid}
+.ep .seeall{align-self:flex-start;background:none;border:none;color:var(--amber);font-weight:600;font-size:.85rem;padding:6px 0;cursor:pointer}
+.ep .seeall:hover{text-decoration:underline}
+.ep .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.ep .btns .btn{padding:11px 18px;font-size:.88rem}
+.platforms-all{margin-top:48px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.platforms-all>span{font-size:.8rem;color:var(--fg-2);letter-spacing:.1em;text-transform:uppercase}
+.platforms{display:flex;flex-wrap:wrap;gap:10px}
 .platforms a{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:999px;border:1px solid var(--line);font-size:.86rem;font-weight:500;transition:.25s}
 .platforms a:hover{border-color:var(--amber);background:rgba(242,162,27,.08);transform:translateY(-2px)}
 .platforms svg{width:16px;height:16px;fill:currentColor}
@@ -166,7 +180,8 @@ section{padding-block:110px}
 .track.playing .bars i:nth-child(2){animation-delay:.2s}.track.playing .bars i:nth-child(3){animation-delay:.4s}
 .track.playing .t{color:var(--amber)}
 @keyframes eq{from{height:20%}to{height:100%}}
-@media (max-width:900px){.release{grid-template-columns:1fr;gap:40px}.cover{max-width:420px}}
+@media (max-width:1000px){.eps{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.eps{grid-template-columns:1fr}}
 
 /* concert */
 .concert{background:radial-gradient(ellipse at 70% 20%,rgba(27,43,212,.35),transparent 55%),var(--bg);position:relative;overflow:hidden}
@@ -340,11 +355,11 @@ footer a:hover{color:var(--amber)}
     <p>Un artiste complet, un univers : « Arabesque ». Nassi a su créer son propre style grâce à ses sonorités qui nous font voyager, des mélodies entraînantes, qui se démarquent par sa sincérité et beaucoup d'émotions.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://dice.fm/event/l8dqkr-nassi-19th-dec-la-maroquinerie-paris-tickets?lng=fr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg>Réserver mon billet</a>
-      <a class="btn btn-ghost" href="#musique"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Écouter Arabesque</a>
+      <a class="btn btn-ghost" href="#musique"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Écouter les EP</a>
     </div>
     <div class="hero-meta">
-      <div><strong>Arabesque Vol. III</strong>Dernière sortie</div>
-      <div><strong>Ya Lalla</strong>Clip officiel</div>
+      <div><strong>Au cœur du Rif</strong>Dernier EP</div>
+      <div><strong>Bye bye Delali</strong>EP 2026</div>
       <div><strong>14 pièces</strong>Boutique officielle</div>
     </div>
   </div>
@@ -353,7 +368,7 @@ footer a:hover{color:var(--amber)}
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track" id="marquee">
-    <span>Arabesque</span><span>Ya Lalla</span><span>Layali</span><span>Boussa</span><span>Rifia</span><span>Dark Nador</span><span>Arabesque Vol. II</span><span>Arabesque Vol. III</span>
+    <span>Au cœur du Rif</span><span>Bye bye Delali</span><span>Arabesque Volume 3</span><span>Rifia</span><span>Dark Nador</span><span>Boussa</span><span>Mes yeux</span><span>Bent nass</span>
   </div>
 </div>
 
@@ -387,32 +402,54 @@ footer a:hover{color:var(--amber)}
 <section class="musique" id="musique">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div><div class="eyebrow">Musique</div><h2>Dernière sortie</h2></div>
-      <p>Disponible sur toutes les plateformes. Lancez l'écoute, montez le son.</p>
+      <div><div class="eyebrow">Musique</div><h2>Les derniers projets</h2></div>
+      <p>Trois chapitres de l'univers Arabesque, disponibles sur toutes les plateformes. Cliquez sur une pochette pour écouter.</p>
     </div>
-    <div class="release">
-      <div class="cover reveal">
-        <img src="img/r3a7306.jpg" alt="Pochette Arabesque Vol. III">
-        <span class="vol"><img src="img/logo-white.png" alt="Nassi" style="height:12px;width:auto"></span>
-        <a class="play" href="https://orcd.co/arabesque3" target="_blank" rel="noopener" aria-label="Écouter Arabesque Vol. III"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></a>
-      </div>
-      <div class="reveal">
-        <div class="eyebrow">Album</div>
-        <h3>Arabesque<br>Vol. III</h3>
-        <p>Le troisième chapitre de la trilogie Arabesque. Des mélodies solaires, des textes intimes, et le clip « Ya Lalla » déjà disponible sur YouTube.</p>
-        <div class="platforms">
-          <a href="https://orcd.co/arabesque3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.3 14.5c-.2.3-.6.4-.9.2-2.5-1.5-5.6-1.9-9.3-1-.4.1-.7-.1-.8-.5s.1-.7.5-.8c4-.9 7.5-.5 10.3 1.2.3.2.4.6.2.9zm1.1-2.6c-.2.4-.7.5-1.1.3-2.8-1.7-7.2-2.2-10.5-1.2-.5.1-.9-.1-1-.6s.1-.9.6-1c3.8-1.2 8.6-.6 11.9 1.4.3.2.4.7.1 1.1zm.1-2.7C14.2 9.3 8.5 9.1 5.3 10.1c-.5.2-1.1-.1-1.2-.7-.2-.5.1-1.1.7-1.2 3.7-1.1 9.9-.9 13.8 1.4.5.3.6.9.4 1.4-.3.5-1 .6-1.5.4z"/></svg>Spotify</a>
-          <a href="https://orcd.co/arabesque3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.9-.8-3.1-.8C6.8 7.4 5.3 8.3 4.5 9.8c-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.1.8c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7 0 0-2.6-1-2.7-4.3zM14.1 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg>Apple Music</a>
-          <a href="https://youtu.be/WWba-sSMEQk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23 7.2c-.3-1-1-1.8-2-2C19.2 4.7 12 4.7 12 4.7s-7.2 0-9 .5c-1 .3-1.8 1-2 2C.5 9 .5 12 .5 12s0 3 .5 4.8c.3 1 1 1.8 2 2 1.8.5 9 .5 9 .5s7.2 0 9-.5c1-.3 1.8-1 2-2 .5-1.8.5-4.8.5-4.8s0-3-.5-4.8zM9.7 15.3V8.7l6 3.3-6 3.3z"/></svg>Clip « Ya Lalla »</a>
-          <a href="https://orcd.co/arabesque3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.7-4-2.3z"/></svg>Toutes les plateformes</a>
-        </div>
-        <div class="tracklist" id="tracklist">
-          <div class="track" data-t="Ya Lalla"><span class="n">01</span><span class="t">Ya Lalla</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:12</span></div>
-          <div class="track" data-t="Layali"><span class="n">02</span><span class="t">Layali</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:28</span></div>
-          <div class="track" data-t="Boussa"><span class="n">03</span><span class="t">Boussa</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:57</span></div>
-          <div class="track" data-t="Rifia"><span class="n">04</span><span class="t">Rifia</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:41</span></div>
-          <div class="track" data-t="Dark Nador"><span class="n">05</span><span class="t">Dark Nador</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:05</span></div>
-        </div>
+    <div class="eps">
+      <article class="ep reveal" id="ep-rif">
+        <a class="cover" href="https://www.deezer.com/album/1030608592" target="_blank" rel="noopener" aria-label="Écouter Au cœur du Rif">
+          <img src="img/covers/rif.jpg" alt="Pochette Au cœur du Rif"><span class="tagnew">Nouveau</span>
+          <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </a>
+        <div class="meta">EP · Août 2026 · 6 titres</div>
+        <h3>Au cœur du Rif</h3>
+        <p class="desc">Six titres qui racontent la terre d’origine, entre Rifia, Dark Nador et Arif ino.</p>
+        <div class="tracklist"><div class="track"><span class="n">01</span><span class="t">Rifia</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:55</span></div><div class="track"><span class="n">02</span><span class="t">Dark Nador</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:11</span></div><div class="track"><span class="n">03</span><span class="t">Temara</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:52</span></div><div class="track"><span class="n">04</span><span class="t">Arif ino</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:29</span></div><div class="track"><span class="n">05</span><span class="t">Mamino</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:58</span></div><div class="track"><span class="n">06</span><span class="t">Awid aman</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:32</span></div></div>
+        
+        <div class="btns"><a class="btn btn-primary" href="https://www.deezer.com/album/1030608592" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Écouter</a></div>
+      </article>
+      <article class="ep reveal" id="ep-delali">
+        <a class="cover" href="https://www.deezer.com/album/837714972" target="_blank" rel="noopener" aria-label="Écouter Bye bye Delali">
+          <img src="img/covers/delali.jpg" alt="Pochette Bye bye Delali">
+          <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </a>
+        <div class="meta">EP · Avril 2026 · 5 titres</div>
+        <h3>Bye bye Delali</h3>
+        <p class="desc">Cinq titres solaires, dont Boussa, Matta et le remix afro de Mes yeux.</p>
+        <div class="tracklist"><div class="track"><span class="n">01</span><span class="t">Matta</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:28</span></div><div class="track"><span class="n">02</span><span class="t">Boussa</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:41</span></div><div class="track"><span class="n">03</span><span class="t">Aysha</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:16</span></div><div class="track"><span class="n">04</span><span class="t">Bye bye delali</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:05</span></div><div class="track"><span class="n">05</span><span class="t">Mes yeux (Afro Remix)</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:12</span></div></div>
+        
+        <div class="btns"><a class="btn btn-primary" href="https://www.deezer.com/album/837714972" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Écouter</a></div>
+      </article>
+      <article class="ep reveal" id="ep-arabesque3">
+        <a class="cover" href="https://orcd.co/arabesque3" target="_blank" rel="noopener" aria-label="Écouter Arabesque Volume 3">
+          <img src="img/covers/arabesque3.jpg" alt="Pochette Arabesque Volume 3">
+          <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </a>
+        <div class="meta">Album · Mars 2023 · 22 titres</div>
+        <h3>Arabesque Volume 3</h3>
+        <p class="desc">Le troisième chapitre de la trilogie Arabesque : Que de la musique, Diali, Mes yeux, Nous…</p>
+        <div class="tracklist"><div class="track"><span class="n">01</span><span class="t">Que de la musique</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:14</span></div><div class="track"><span class="n">02</span><span class="t">Diamant</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:56</span></div><div class="track"><span class="n">03</span><span class="t">Nous</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:13</span></div><div class="track"><span class="n">04</span><span class="t">Dans le noir</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:09</span></div><div class="track"><span class="n">05</span><span class="t">Diali</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:46</span></div><div class="track"><span class="n">06</span><span class="t">Si tu savais</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:09</span></div><div class="track more"><span class="n">07</span><span class="t">Marqués à vie</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:57</span></div><div class="track more"><span class="n">08</span><span class="t">Mes yeux</span><span class="bars"><i></i><i></i><i></i></span><span class="d">4:12</span></div><div class="track more"><span class="n">09</span><span class="t">Arabesque 2 (Intro)</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:29</span></div><div class="track more"><span class="n">10</span><span class="t">Wana</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:10</span></div><div class="track more"><span class="n">11</span><span class="t">Next Level</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:30</span></div><div class="track more"><span class="n">12</span><span class="t">Caractère</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:10</span></div><div class="track more"><span class="n">13</span><span class="t">Serre moi fort</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:52</span></div><div class="track more"><span class="n">14</span><span class="t">Allo mama</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:26</span></div><div class="track more"><span class="n">15</span><span class="t">Assez</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:18</span></div><div class="track more"><span class="n">16</span><span class="t">Arabesque (Intro)</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:07</span></div><div class="track more"><span class="n">17</span><span class="t">À la dérive</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:54</span></div><div class="track more"><span class="n">18</span><span class="t">Toi et Moi</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:07</span></div><div class="track more"><span class="n">19</span><span class="t">Souhila</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:44</span></div><div class="track more"><span class="n">20</span><span class="t">Ce qu’il me reste</span><span class="bars"><i></i><i></i><i></i></span><span class="d">2:45</span></div><div class="track more"><span class="n">21</span><span class="t">Sans visage</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:05</span></div><div class="track more"><span class="n">22</span><span class="t">Mes yeux (acoustique)</span><span class="bars"><i></i><i></i><i></i></span><span class="d">3:28</span></div></div>
+        <button class="seeall" type="button" data-more="Voir les 22 titres" data-less="Réduire">Voir les 22 titres</button>
+        <div class="btns"><a class="btn btn-primary" href="https://orcd.co/arabesque3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Écouter</a></div>
+      </article>
+    </div>
+    <div class="platforms-all reveal">
+      <span>Retrouver Nassi sur</span>
+      <div class="platforms">
+        <a href="https://open.spotify.com/intl-fr/artist/1qKKI6tBqJZCZfAmXjYFjN" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.3 14.5c-.2.3-.6.4-.9.2-2.5-1.5-5.6-1.9-9.3-1-.4.1-.7-.1-.8-.5s.1-.7.5-.8c4-.9 7.5-.5 10.3 1.2.3.2.4.6.2.9zm1.1-2.6c-.2.4-.7.5-1.1.3-2.8-1.7-7.2-2.2-10.5-1.2-.5.1-.9-.1-1-.6s.1-.9.6-1c3.8-1.2 8.6-.6 11.9 1.4.3.2.4.7.1 1.1zm.1-2.7C14.2 9.3 8.5 9.1 5.3 10.1c-.5.2-1.1-.1-1.2-.7-.2-.5.1-1.1.7-1.2 3.7-1.1 9.9-.9 13.8 1.4.5.3.6.9.4 1.4-.3.5-1 .6-1.5.4z"/></svg>Spotify</a>
+        <a href="https://music.apple.com/fr/artist/nassi/385335071" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.9-3.5.9s-1.9-.8-3.1-.8C6.8 7.4 5.3 8.3 4.5 9.8c-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.1.8c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.6 1.3-2.7 0 0-2.6-1-2.7-4.3zM14.1 5.8c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg>Apple Music</a>
+        <a href="https://www.deezer.com/artist/4436016" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18.8 4h4.7v2.6h-4.7zM18.8 7.9h4.7v2.6h-4.7zM12.6 7.9h4.7v2.6h-4.7zM18.8 11.7h4.7v2.6h-4.7zM12.6 11.7h4.7v2.6h-4.7zM6.3 11.7H11v2.6H6.3zM18.8 15.6h4.7v2.6h-4.7zM12.6 15.6h4.7v2.6h-4.7zM6.3 15.6H11v2.6H6.3zM0 15.6h4.7v2.6H0z"/></svg>Deezer</a>
+        <a href="https://youtu.be/WWba-sSMEQk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23 7.2c-.3-1-1-1.8-2-2C19.2 4.7 12 4.7 12 4.7s-7.2 0-9 .5c-1 .3-1.8 1-2 2C.5 9 .5 12 .5 12s0 3 .5 4.8c.3 1 1 1.8 2 2 1.8.5 9 .5 9 .5s7.2 0 9-.5c1-.3 1.8-1 2-2 .5-1.8.5-4.8.5-4.8s0-3-.5-4.8zM9.7 15.3V8.7l6 3.3-6 3.3z"/></svg>YouTube</a>
       </div>
     </div>
   </div>
@@ -677,8 +714,9 @@ navLinks.addEventListener('click',()=>navLinks.classList.remove('open'));
 // marquee : duplication pour la boucle
 const mq=document.getElementById('marquee');mq.innerHTML+=mq.innerHTML;
 // tracklist : état "en lecture" (visuel)
-document.getElementById('tracklist').addEventListener('click',e=>{const t=e.target.closest('.track');if(!t)return;
-  document.querySelectorAll('.track').forEach(x=>x.classList.toggle('playing',x===t&&!x.classList.contains('playing')));});
+document.querySelectorAll('.tracklist').forEach(tl=>tl.addEventListener('click',e=>{const t=e.target.closest('.track');if(!t)return;
+  document.querySelectorAll('.track').forEach(x=>x.classList.toggle('playing',x===t&&!x.classList.contains('playing')));}));
+document.querySelectorAll('.ep .seeall').forEach(b=>b.addEventListener('click',()=>{const ep=b.closest('.ep');const o=ep.classList.toggle('open');b.textContent=o?b.dataset.less:b.dataset.more;}));
 // grain du hero
 (function(){const c=document.getElementById('grain');const ctx=c.getContext('2d');c.width=320;c.height=320;
   const img=ctx.createImageData(320,320);for(let i=0;i<img.data.length;i+=4){const v=Math.random()*255;img.data[i]=img.data[i+1]=img.data[i+2]=v;img.data[i+3]=40;}ctx.putImageData(img,0,0);
