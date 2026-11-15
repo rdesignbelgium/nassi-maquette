@@ -11,15 +11,18 @@
 #                                     seront poussés depuis Gelato)
 # =====================================================================
 set -euo pipefail
-HERE="$(cd "$(dirname "$0")" && pwd)"
+HERE="${NASSI_PKG:-$HOME/pkg}/setup"
+wp() { php -d memory_limit=512M "$HOME/wp-cli.phar" "$@"; }
+export -f wp
 IMPORT_CSV=1; [[ "${1:-}" == "--no-csv" ]] && IMPORT_CSV=0
 
 echo "▶ Thème"
-wp theme install "$HERE/../nassi.zip" --activate --force 2>/dev/null || { cp -r "$HERE/../nassi" "$(wp theme path)/" && wp theme activate nassi; }
+wp theme install "$HERE/../nassi.zip" --activate --force || { cp -r "$HERE/../nassi" "$(wp theme path)/" && wp theme activate nassi; }
 
 echo "▶ Extensions"
-wp plugin install woocommerce elementor gelato-integration-for-woocommerce mollie-payments-for-woocommerce wordpress-seo wp-mail-smtp --activate
-wp plugin uninstall hello-dolly akismet --deactivate 2>/dev/null || true
+for p in woocommerce elementor gelato-integration-for-woocommerce mollie-payments-for-woocommerce wordpress-seo wp-mail-smtp; do wp plugin is-installed "$p" 2>/dev/null || wp plugin install "$p"; wp plugin activate "$p" || true; done
+wp plugin uninstall hello akismet --deactivate 2>/dev/null || true
+wp theme delete twentytwentyfive twentytwentyfour twentytwentythree 2>/dev/null || true
 
 echo "▶ Réglages généraux"
 wp option update blogname "Nassi"
