@@ -4,7 +4,7 @@
  * Si la page d'accueil est construite avec Elementor, ce gabarit est ignoré (voir page.php).
  */
 get_header();
-$title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|rives.' ) ), 3, '' );
+$title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title' ) ), 3, '' );
 ?>
 <section class="hero" id="top">
 	<div class="hero-bg"><img src="<?php echo esc_url( nassi_img( 'nassi_hero_image', 'r3a7417.jpg' ) ); ?>" alt=""></div>
@@ -15,12 +15,12 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 		<h1><?php echo esc_html( $title[0] ); ?><br><span class="outline"><?php echo esc_html( $title[1] ); ?></span><em><?php echo esc_html( $title[2] ); ?></em></h1>
 		<p><?php echo esc_html( nassi_mod( 'nassi_hero_text' ) ); ?></p>
 		<div class="hero-cta">
-			<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url', '#concert' ) ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( 'ticket' ); ?>Réserver mon billet</a>
+			<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener"><?php echo nassi_icon( 'ticket' ); ?>Réserver mon billet</a>
 			<a class="btn btn-ghost" href="#musique"><?php echo nassi_icon( 'play' ); ?>Écouter les EP</a>
 		</div>
 		<div class="hero-meta">
-			<div><strong><?php echo esc_html( nassi_mod( 'nassi_ep1_title', 'Au cœur du Rif' ) ); ?></strong>Dernier EP</div>
-			<div><strong><?php echo esc_html( nassi_mod( 'nassi_concert_venue', 'La Maroquinerie' ) ); ?></strong>Prochain concert</div>
+			<div><strong><?php echo esc_html( nassi_mod( 'nassi_ep1_title' ) ); ?></strong>Dernier EP</div>
+			<div><strong><?php echo esc_html( nassi_mod( 'nassi_concert_venue' ) ); ?></strong>Prochain concert</div>
 			<?php if ( function_exists( 'wc_get_products' ) ) : ?><div><strong><?php echo (int) wp_count_posts( 'product' )->publish; ?> pièces</strong>Boutique officielle</div><?php endif; ?>
 		</div>
 	</div>
@@ -28,7 +28,7 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 </section>
 
 <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee">
-	<?php foreach ( explode( '|', nassi_mod( 'nassi_marquee', 'Arabesque' ) ) as $t ) echo '<span>' . esc_html( trim( $t ) ) . '</span>'; ?>
+	<?php foreach ( explode( '|', nassi_mod( 'nassi_marquee' ) ) as $t ) echo '<span>' . esc_html( trim( $t ) ) . '</span>'; ?>
 </div></div>
 
 <section class="univers" id="univers">
@@ -48,7 +48,7 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 		</div>
 		<div class="univers-copy">
 			<div class="reveal">
-				<h3><?php echo esc_html( nassi_mod( 'nassi_univers_h3', 'Une voix unique, un artiste complet : Nassi. Un univers : « Arabesque ».' ) ); ?></h3>
+				<h3><?php echo esc_html( nassi_mod( 'nassi_univers_h3' ) ); ?></h3>
 				<p><?php echo esc_html( nassi_mod( 'nassi_univers_text' ) ); ?></p>
 			</div>
 			<div class="quote reveal"><?php echo esc_html( nassi_mod( 'nassi_quote' ) ); ?><small>Nassi · Arabesque</small></div>
@@ -59,14 +59,14 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 <section class="musique" id="musique">
 	<div class="wrap">
 		<div class="sec-head reveal">
-			<div><div class="eyebrow">Musique</div><h2><?php echo esc_html( nassi_mod( 'nassi_music_title', 'Les derniers projets' ) ); ?></h2></div>
+			<div><div class="eyebrow">Musique</div><h2><?php echo esc_html( nassi_mod( 'nassi_music_title' ) ); ?></h2></div>
 			<p><?php echo esc_html( nassi_mod( 'nassi_music_text' ) ); ?></p>
 		</div>
 		<div class="eps">
 			<?php $covers = [ 1 => 'rif.jpg', 2 => 'delali.jpg', 3 => 'arabesque3.jpg' ];
 			for ( $i = 1; $i <= 3; $i++ ) :
 				$title = nassi_mod( "nassi_ep{$i}_title" ); if ( ! $title ) continue;
-				$link  = nassi_mod( "nassi_ep{$i}_link", '#' );
+				$link  = nassi_mod( "nassi_ep{$i}_link" );
 				$tracks = array_values( array_filter( array_map( function ( $t ) { $p = explode( ':', $t, 2 ); return count( $p ) === 2 ? [ trim( $p[0] ), trim( $p[1] ) ] : null; }, explode( '|', (string) nassi_mod( "nassi_ep{$i}_tracks" ) ) ) ) ); ?>
 			<article class="ep reveal">
 				<a class="cover" href="<?php echo esc_url( $link ); ?>" target="_blank" rel="noopener" aria-label="Écouter <?php echo esc_attr( $title ); ?>">
@@ -107,7 +107,7 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 		<div class="concert-grid">
 			<div class="reveal">
 				<div class="eyebrow">Concert</div>
-				<h2 class="h2"><?php echo esc_html( nassi_mod( 'nassi_concert_city', 'Paris' ) ); ?>, le <?php echo esc_html( date_i18n( 'j F', strtotime( nassi_mod( 'nassi_concert_date', '2026-12-19' ) ) ) ); ?>. Une seule soirée.</h2>
+				<h2 class="h2"><?php echo esc_html( nassi_mod( 'nassi_concert_city' ) ); ?>, le <?php echo esc_html( date_i18n( 'j F', strtotime( nassi_mod( 'nassi_concert_date' ) ) ) ); ?>. Une seule soirée.</h2>
 				<p class="lead"><?php echo esc_html( nassi_mod( 'nassi_concert_text' ) ); ?></p>
 				<div class="countdown" id="countdown" aria-live="polite">
 					<div><b id="cdD">00</b><small>jours</small></div><div><b id="cdH">00</b><small>heures</small></div><div><b id="cdM">00</b><small>min</small></div><div><b id="cdS">00</b><small>sec</small></div>

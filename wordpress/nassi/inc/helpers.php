@@ -11,7 +11,10 @@ function nassi_img( $mod, $fallback, $size = 'full' ) {
 	return NASSI_URI . '/assets/img/' . $fallback;
 }
 
-function nassi_mod( $k, $d = '' ) { return get_theme_mod( $k, $d ); }
+function nassi_mod( $k, $d = null ) {
+	if ( $d === null ) { $all = nassi_defaults(); $d = $all[ $k ] ?? ''; }
+	return get_theme_mod( $k, $d );
+}
 
 /** Icônes SVG inline. */
 function nassi_icon( $name ) {

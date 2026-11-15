@@ -21,7 +21,8 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp ) {
 		$wp->add_section( "nassi_$id", [ 'title' => $title, 'panel' => 'nassi' ] );
 	}
 
-	$f = function ( $id, $label, $section, $type = 'text', $default = '', $choices = [] ) use ( $wp ) {
+	$f = function ( $id, $label, $section, $type = 'text', $default = null, $choices = [] ) use ( $wp ) {
+		if ( $default === null ) $default = nassi_defaults()[ $id ] ?? '';
 		$wp->add_setting( $id, [ 'default' => $default, 'sanitize_callback' => $type === 'textarea' ? 'wp_kses_post' : ( $type === 'url' ? 'esc_url_raw' : 'sanitize_text_field' ) ] );
 		$args = [ 'label' => $label, 'section' => "nassi_$section", 'type' => $type ];
 		if ( $choices ) $args['choices'] = $choices;

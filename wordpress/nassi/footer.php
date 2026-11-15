@@ -42,7 +42,7 @@
 	</div>
 </footer>
 <div class="sticky-cta" id="stickyCta">
-	<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url', '#concert' ) ); ?>" target="_blank" rel="noopener">Billets</a>
+	<a class="btn btn-primary" href="<?php echo esc_url( nassi_mod( 'nassi_concert_url' ) ); ?>" target="_blank" rel="noopener">Billets</a>
 	<?php if ( function_exists( 'wc_get_page_permalink' ) ) : ?><a class="btn btn-ghost" href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>">Shop</a><?php endif; ?>
 </div>
 <div class="toast" id="toast"></div>

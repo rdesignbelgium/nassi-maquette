@@ -10,13 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function nassi_dice_events() {
 	$key = trim( (string) get_theme_mod( 'nassi_dice_api_key' ) );
 	$manual = [ [
-		'name'   => nassi_mod( 'nassi_concert_name', 'Nassi live' ),
-		'start'  => nassi_mod( 'nassi_concert_date', '2026-12-19T20:00:00+01:00' ),
-		'venue'  => nassi_mod( 'nassi_concert_venue', 'La Maroquinerie' ),
-		'city'   => nassi_mod( 'nassi_concert_city', 'Paris' ),
-		'price'  => nassi_mod( 'nassi_concert_price', '24 €' ),
-		'status' => nassi_mod( 'nassi_concert_status', 'En vente' ),
-		'url'    => nassi_mod( 'nassi_concert_url', 'https://dice.fm/' ),
+		'name'   => nassi_mod( 'nassi_concert_name' ),
+		'start'  => nassi_mod( 'nassi_concert_date' ),
+		'venue'  => nassi_mod( 'nassi_concert_venue' ),
+		'city'   => nassi_mod( 'nassi_concert_city' ),
+		'price'  => nassi_mod( 'nassi_concert_price' ),
+		'status' => nassi_mod( 'nassi_concert_status' ),
+		'url'    => nassi_mod( 'nassi_concert_url' ),
 	] ];
 	if ( ! $key ) return $manual;
 

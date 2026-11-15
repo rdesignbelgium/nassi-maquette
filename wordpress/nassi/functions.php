@@ -10,6 +10,7 @@ define( 'NASSI_VERSION', '1.0.0' );
 define( 'NASSI_DIR', get_template_directory() );
 define( 'NASSI_URI', get_template_directory_uri() );
 
+require NASSI_DIR . '/inc/defaults.php';
 require NASSI_DIR . '/inc/customizer.php';
 require NASSI_DIR . '/inc/woocommerce.php';
 require NASSI_DIR . '/inc/dice.php';
