@@ -35,15 +35,16 @@ add_action( 'customize_register', function ( WP_Customize_Manager $wp ) {
 	// Hero
 	$img( 'nassi_hero_image', 'Photo de fond', 'hero' );
 	$f( 'nassi_hero_badge', 'Badge (ex. « 19 décembre · La Maroquinerie, Paris »)', 'hero', 'text', '19 décembre · La Maroquinerie, Paris · Billets en vente' );
-	$f( 'nassi_hero_title', 'Titre (3 lignes séparées par |)', 'hero', 'text', 'Entre|deux|rives.' );
-	$f( 'nassi_hero_text', 'Texte', 'hero', 'textarea', 'Des mélodies qui traversent la Méditerranée, des textes qui parlent au cœur. Bienvenue dans l’univers de Nassi : la musique, la scène, et les pièces à porter.' );
+	$f( 'nassi_hero_title', 'Titre (3 lignes séparées par |)', 'hero', 'text', 'Une voix|unique.|Arabesque.' );
+	$f( 'nassi_hero_text', 'Texte', 'hero', 'textarea', 'Un artiste complet, un univers : « Arabesque ». Nassi a su créer son propre style grâce à ses sonorités qui nous font voyager, des mélodies entraînantes, qui se démarquent par sa sincérité et beaucoup d’émotions.' );
 	$f( 'nassi_marquee', 'Bandeau défilant (titres séparés par |)', 'hero', 'text', 'Arabesque|Ya Lalla|Layali|Boussa|Rifia|Dark Nador|Bent nass|Mes yeux' );
 
 	// Univers
 	for ( $i = 1; $i <= 5; $i++ ) $img( "nassi_univers_$i", "Photo $i", 'univers' );
 	$f( 'nassi_univers_title', 'Titre', 'univers', 'text', 'La lumière, le micro, et une voix.' );
-	$f( 'nassi_univers_text', 'Texte', 'univers', 'textarea', 'Nassi chante ce qu’on ressent sans toujours savoir le dire : l’attachement, la nostalgie, les retrouvailles, la fête.' );
-	$f( 'nassi_quote', 'Citation', 'univers', 'textarea', 'La scène, c’est l’endroit où la distance disparaît. Chaque concert, c’est une maison qu’on ouvre.' );
+	$f( 'nassi_univers_text', 'Texte', 'univers', 'textarea', 'Nassi a su créer son propre style grâce à ses sonorités qui nous font voyager, des mélodies entraînantes, qui se démarquent par sa sincérité et beaucoup d’émotions.' );
+	$f( 'nassi_univers_h3', 'Sous-titre', 'univers', 'text', 'Une voix unique, un artiste complet : Nassi. Un univers : « Arabesque ».' );
+	$f( 'nassi_quote', 'Version anglaise / citation', 'univers', 'textarea', 'A unique voice, a complete artist: Nassi. A universe: “Arabesque”. Nassi has created his own style thanks to his sounds that make us travel, catchy melodies, which stand out for his sincerity and a lot of emotions.' );
 
 	// Musique
 	$img( 'nassi_cover', 'Pochette', 'musique' );

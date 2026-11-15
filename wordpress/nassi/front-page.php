@@ -48,10 +48,10 @@ $title = array_pad( explode( '|', nassi_mod( 'nassi_hero_title', 'Entre|deux|riv
 		</div>
 		<div class="univers-copy">
 			<div class="reveal">
-				<h3>Une musique qui parle à ceux qui vivent entre deux cultures.</h3>
+				<h3><?php echo esc_html( nassi_mod( 'nassi_univers_h3', 'Une voix unique, un artiste complet : Nassi. Un univers : « Arabesque ».' ) ); ?></h3>
 				<p><?php echo esc_html( nassi_mod( 'nassi_univers_text' ) ); ?></p>
 			</div>
-			<div class="quote reveal">« <?php echo esc_html( nassi_mod( 'nassi_quote' ) ); ?> »<small>Nassi</small></div>
+			<div class="quote reveal"><?php echo esc_html( nassi_mod( 'nassi_quote' ) ); ?><small>Nassi · Arabesque</small></div>
 		</div>
 	</div>
 </section>
